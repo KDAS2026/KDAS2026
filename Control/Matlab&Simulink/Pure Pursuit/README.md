@@ -1,5 +1,5 @@
 # Pure Pursuit Steering Control  
-### ROS2 – Simulink Integrated Control Architecture (Qualification Submission)
+### ROS2 – Simulink Integrated Control Architecture 
 
 This document describes the **Pure Pursuit–based steering control module** used in our qualification-stage autonomous driving system.  
 The focus is on **how the controller was structured, integrated, and utilized** within the ROS2–Simulink pipeline, rather than on vehicle dynamics or real-world experiments.
