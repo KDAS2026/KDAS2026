@@ -4,10 +4,6 @@ This document describes the obstacle avoidance algorithm designed for
 simple static and dynamic obstacle scenarios that may occur in the
 qualification-stage autonomous driving environment.
 
-The proposed obstacle avoidance strategy prioritizes **stability,
-explainability, and practical implementability**, and is intended to be
-continuously refined and updated as experimental validation progresses.
-
 ---
 
 ## 1. Avoidance Trigger Condition
