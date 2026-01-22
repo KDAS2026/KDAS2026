@@ -138,7 +138,7 @@ The centerline was laterally expanded by the lane width to generate left and rig
 Initially, RRT was executed by forming a single free-space polygon using the entire track centerline.  
 However, the presence of **intersections**, **roundabouts**, and **bi-directional lanes** caused **overlaps and tangling** among free-space polygons.
 
-<p align="center"><img src="../images/rrt1.png" width="700"/></p>
+<p align="center"><img src="../images/rrt1.png" width="400"/></p>
 
 As a result:
 - The free-space definition became incomplete.  
