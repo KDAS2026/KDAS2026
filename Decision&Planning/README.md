@@ -513,7 +513,6 @@ training hyperparameters used in the experiments.
 | Discount Factor (γ) | Future reward discount | 0.9 |
 | Episodes | Total training episodes | 5000 |
 | Max Steps per Episode | Episode horizon | 100 |
-|
 
 
 Fallback mechanism:  
