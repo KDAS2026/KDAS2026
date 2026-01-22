@@ -103,21 +103,21 @@ names: ['Red', 'Green', 'Yellow', 'roundabout', 'stop']
 
 | Augmentation | Used | Reason |
 |:--------------|:-----:|:-------|
-| **hsv_h** | ❌ | Not needed — simulation lighting and hue remain consistent |
-| **hsv_s** | ❌ | Fixed saturation; applying may cause confusion in color recognition |
-| **hsv_v** | ❌ | Brightness uniform; unnecessary for this setup |
-| **scale** | ✅ | Handles object-size change with distance during driving |
-| **translate** | ✅ | Corrects positional offsets from camera vibration or drift |
-| **flipud** | ❌ | No vertical inversion cases (road or sign are upright only) |
-| **fliplr** | ✅ | Enhances generalization for left/right lane direction changes |
-| **degrees** | ✅ | Compensates for small pitch/yaw rotations from vehicle motion |
-| **shear** | ✅ | Covers mild lens tilt or camera misalignment distortions |
-| **perspective** | ✅ | Adjusts for forward-motion depth and perspective effects |
-| **blur** | ✅ | Simulates motion blur or autofocus deviation during movement |
-| **noise** | ✅ | Emulates RealSense sensor noise or compression artifacts |
-| **cutout** | ❌ | Causes excessive distortion and harms efficiency |
-| **mosaic** | ✅ | Boosts detection of small signs by diversifying scene backgrounds |
-| **mixup** | ❌ | Reduces edge sharpness; harms small object discrimination |
+| **hsv_h** | X | Not needed — simulation lighting and hue remain consistent |
+| **hsv_s** | X | Fixed saturation; applying may cause confusion in color recognition |
+| **hsv_v** | X | Brightness uniform; unnecessary for this setup |
+| **scale** | O | Handles object-size change with distance during driving |
+| **translate** | O | Corrects positional offsets from camera vibration or drift |
+| **flipud** | X | No vertical inversion cases (road or sign are upright only) |
+| **fliplr** | O | Enhances generalization for left/right lane direction changes |
+| **degrees** | O | Compensates for small pitch/yaw rotations from vehicle motion |
+| **shear** | O | Covers mild lens tilt or camera misalignment distortions |
+| **perspective** | O | Adjusts for forward-motion depth and perspective effects |
+| **blur** | O | Simulates motion blur or autofocus deviation during movement |
+| **noise** | O | Emulates RealSense sensor noise or compression artifacts |
+| **cutout** | X | Causes excessive distortion and harms efficiency |
+| **mosaic** | O | Boosts detection of small signs by diversifying scene backgrounds |
+| **mixup** | X | Reduces edge sharpness; harms small object discrimination |
 
 ---
 
