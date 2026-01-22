@@ -63,16 +63,11 @@ The figure below illustrates the concept of shifting overlapping
 waypoints laterally to generate an avoidance path while maintaining
 smooth path continuity.
 
-<table>
-  <tr>
-    <td align="center">
-      <img src="../../images/avoid.png"
-           alt="Waypoint Offset Based Obstacle Avoidance Concept"
-           width="700"/><br/>
-      <b>Waypoint Offset-Based Obstacle Avoidance Concept</b>
-    </td>
-  </tr>
-</table>
+<div align="center">
+  <img src="../../images/avoid.png" alt="Waypoint Offset Based Obstacle Avoidance Concept" width="700" />
+  <br/>
+  <b>Waypoint Offset Based Obstacle Avoidance Concept</b>
+</div>
 
 ---
 
