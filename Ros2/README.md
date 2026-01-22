@@ -7,7 +7,7 @@ This repository contains the source code for the **QCar2 Autonomous Driving Syst
 <div align="center">
   <img src="../images/ROS1.gif" alt="ROS" width="700" />
   <br/>
-  <b>Pure Pursuit Steering Control Result</b>
+  <b>ROS</b>
 </div>
 
 ##  Project Overview
