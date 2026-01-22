@@ -49,20 +49,22 @@ Repeating this process rapidly expands the tree throughout the space until it re
 ### (1) Random Sampling
 
 $$
-q_{\text{rand}} \sim U(Q)
+q_{\mathrm{rand}} \sim U(Q)
 $$
 
-A random point \( q_{\text{rand}} \) is sampled within the search space \( Q \).
+A random point \( q_{\mathrm{rand}} \) is sampled within the search space \( Q \).
 
 ---
 
 ### (2) Nearest-Node Search
 
 $$
-q_{\text{near}} = \underset{q_i \in T}{\arg\min}\, \text{dist}(q_i, q_{\text{rand}})
+q_{\mathrm{near}} =
+\underset{q_i \in T}{\arg\min}\,
+\mathrm{dist}(q_i, q_{\mathrm{rand}})
 $$
 
-Among all nodes currently in the tree, the one with the smallest distance to \( q_{\text{rand}} \) is selected.
+Among all nodes currently in the tree, the one with the smallest distance to \( q_{\mathrm{rand}} \) is selected.
 
 The distance metric can be Euclidean or any metric suitable for the configuration space.
 
@@ -71,25 +73,28 @@ The distance metric can be Euclidean or any metric suitable for the configuratio
 ### (3) Tree Extension (Steer Function)
 
 $$
-q_{\text{new}} = q_{\text{near}} + 
-\frac{(q_{\text{rand}} - q_{\text{near}})}{\|q_{\text{rand}} - q_{\text{near}}\|} \cdot \varepsilon
+q_{\mathrm{new}} =
+q_{\mathrm{near}} +
+\frac{q_{\mathrm{rand}} - q_{\mathrm{near}}}
+{\lVert q_{\mathrm{rand}} - q_{\mathrm{near}} \rVert}
+\cdot \varepsilon
 $$
 
-From \( q_{\text{near}} \), a new point \( q_{\text{new}} \) is created by moving a step \( \varepsilon \) toward \( q_{\text{rand}} \).
+From \( q_{\mathrm{near}} \), a new point \( q_{\mathrm{new}} \) is created by moving a step \( \varepsilon \) toward \( q_{\mathrm{rand}} \).
 
-In other words, one incremental step is taken in the direction of \( q_{\text{rand}} \).
+In other words, one incremental step is taken in the direction of \( q_{\mathrm{rand}} \).
 
 ---
 
 ### (4) Collision Check
 
 $$
-q_{\text{new}} \in C_{\text{free}}
+q_{\mathrm{new}} \in C_{\mathrm{free}}
 $$
 
-Verify that \( q_{\text{new}} \) lies within the free configuration space \( C_{\text{free}} \).
+Verify that \( q_{\mathrm{new}} \) lies within the free configuration space \( C_{\mathrm{free}} \).
 
-If it violates the corridor boundary, discard \( q_{\text{new}} \).
+If it violates the corridor boundary, discard \( q_{\mathrm{new}} \).
 
 > **Note**  
 > The closed track has no internal physical obstacles, but the **drivable corridor boundaries**
@@ -99,22 +104,24 @@ If it violates the corridor boundary, discard \( q_{\text{new}} \).
 **Segment-based collision test**
 
 $$
-\text{CollisionFree}(q_{\text{near}}, q_{\text{new}}) =
+\mathrm{CollisionFree}(q_{\mathrm{near}}, q_{\mathrm{new}}) =
 \begin{cases}
-\text{True}, & \text{if } (1-s)q_{\text{near}} + s q_{\text{new}} \notin O,\; \forall s \in [0,1] \\
-\text{False}, & \text{otherwise}
+\mathrm{True},
+& \text{if } (1-s)q_{\mathrm{near}} + s q_{\mathrm{new}} \notin O,
+\ \forall s \in [0,1] \\
+\mathrm{False}, & \text{otherwise}
 \end{cases}
 $$
 
 - \( O \): invalid region (outside the corridor)
-- If no point on the segment between \( q_{\text{near}} \) and \( q_{\text{new}} \) lies inside \( O \) for all \( s \in [0,1] \), the motion is valid.
+- If no point on the segment between \( q_{\mathrm{near}} \) and \( q_{\mathrm{new}} \) lies inside \( O \) for all \( s \in [0,1] \), the motion is valid.
 
 ---
 
 ### (5) Tree Expansion and Node Addition
 
 $$
-T = T \cup \{ (q_{\text{near}}, q_{\text{new}}) \}
+T = T \cup \{ (q_{\mathrm{near}}, q_{\mathrm{new}}) \}
 $$
 
 If valid, add the new node and edge to the tree.
