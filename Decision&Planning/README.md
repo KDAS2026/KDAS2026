@@ -1,204 +1,312 @@
-# Decision & Planning (RRT Global Path + DQN Mission Sequencing)
-/
-This document describes our **planning layer** for a closed-track autonomous taxi scenario.
-We explicitly separate planning into two layers:
+# Decision & Planning (RRT + DQN)
 
-1. **Global Path Generation (Geometry / Drivable Trajectory)**  
-   - Generates a continuous global trajectory (waypoints) inside the track corridor using **segment-wise RRT** and **post-processing smoothing**.
+This module describes our **high-level decision-making and global planning framework**
+for an autonomous vehicle operating in a **closed-loop track environment**.
 
-2. **Planning & Decision (Mission / Node Visit Order)**  
-   - Computes the **optimal route sequence (node visit order)** for Pick-up / Drop-off tasks using a **Deep Q-Network (DQN)** on a directed graph representation.
+To satisfy both **geometric feasibility** and **mission-level decision optimality**,
+we adopt a **hybrid hierarchical planning strategy**:
 
-This separation improves interpretability and integration:
-- **RRT** answers: *“Where can the car physically drive (drivable trajectory)?”*  
-- **DQN** answers: *“In what order should the car visit mission nodes (task sequencing)?”*  
+1. **RRT-based Global Path Generation**
+   - Constructs **continuous, drivable global trajectories** inside lane-constrained free space.
+   - Focuses on geometric feasibility and path smoothness.
 
-The outputs are stored as **JSON waypoint segments** and can be loaded by downstream modules
-(e.g., **MATLAB/Simulink controllers** or **ROS2 helper nodes**) for real-time execution.
+2. **DQN-based Decision & Route Sequencing**
+   - Learns the **optimal visiting order of mission nodes**
+     (e.g., Pickup → Drop-off → Hub).
+   - Operates on a **directed graph abstraction** of the roadmap.
 
----
-
-## Part A. RRT-Based Global Path Generation
-
----
-
-## 1. Overview
-
-This project pre-generates a **global driving path** for an autonomous vehicle operating in a **closed-track environment** using the **RRT (Rapidly-exploring Random Tree)** algorithm.
-
-Because the taxi scenario was conducted on a competition-grade closed track, pre-generation of the entire path was practically feasible.  
-Although the conventional RRT algorithm is effective for path exploration, its **random sampling** nature introduces the following limitations:
-
-- The result differs each time the algorithm is executed, and the generated path often lacks **continuity**.  
-- Since no cost function is considered, RRT does not guarantee an **optimal (shortest or smoothest)** path.
-
-To overcome these issues, the study defines **Free Space** for each track segment, repeatedly executes RRT in every segment, and then performs **post-processing (smoothing)** to construct a continuous and drivable global path.
-
-In other words, while embracing the stochastic exploration characteristic of RRT, we exploit the repeatability of a closed-track environment to evaluate path quality quantitatively and **pre-construct the most stable and consistent trajectory** before real driving.
+> In summary:  
+> **RRT answers _“Where can the car physically drive?”_**  
+> **DQN answers _“Which mission location should be visited next?”_**
 
 ---
 
-## 2. Theoretical Background of RRT
+## 1. System-Level Architecture
 
-The core idea of RRT is to randomly sample a point in the search space, find the nearest node in the existing tree, and extend (steer) the tree from that node toward the sample by a small step Δq.  
-Repeating this process rapidly expands the tree throughout the space until it reaches the goal region.
+Roadmap / SLAM
+↓
+Centerline & Lane Boundaries
+↓
+[ RRT Global Path Generation ]
+↓
+Smoothed Global Path (Trajectory Library)
+↓
+[ DQN Decision Module ]
+↓
+Selected Path Segments / Node Sequence
+↓
+Control (Pure Pursuit)
+
+
+- **RRT** produces a library of feasible path segments.
+- **DQN** selects and orders these segments based on mission objectives.
+- The resulting path is executed by downstream control modules.
 
 ---
 
-### (1) Random Sampling
+## 2. Global Path Generation using RRT
 
-$$
+### 2.1 Motivation
+
+Although RRT efficiently explores free space, its stochastic nature causes:
+- Non-deterministic paths
+- Sharp curvature and discontinuities
+- Lack of optimality guarantees
+
+Because the competition environment is a **closed and repeatable track**,  
+we pre-generate and validate global paths offline.
+
+---
+
+### 2.2 RRT Theoretical Background
+
+**Random Sampling**
+\[
 q_{\text{rand}} \sim U(Q)
-$$
+\]
 
-A random point \( q_{\text{rand}} \) is sampled within the search space \( Q \).
+**Nearest Node Selection**
+\[
+q_{\text{near}} = \arg\min_{q_i \in T} \text{dist}(q_i, q_{\text{rand}})
+\]
 
----
+**Tree Extension**
+\[
+q_{\text{new}} = q_{\text{near}} +
+\frac{q_{\text{rand}} - q_{\text{near}}}
+{\|q_{\text{rand}} - q_{\text{near}}\|} \cdot \varepsilon
+\]
 
-### (2) Nearest-Node Search
-
-$$
-q_{\text{near}} = \underset{q_i \in T}{\arg\min}\, \text{dist}(q_i, q_{\text{rand}})
-$$
-
-Among all nodes currently in the tree, the one with the smallest distance to \( q_{\text{rand}} \) is selected.  
-The distance metric can be Euclidean or any metric suitable for the configuration space.
-
----
-
-### (3) Tree Extension (Steer Function)
-
-$$
-q_{\text{new}} = q_{\text{near}} + 
-\frac{(q_{\text{rand}} - q_{\text{near}})}{\|q_{\text{rand}} - q_{\text{near}}\|} \cdot \varepsilon
-$$
-
-From \( q_{\text{near}} \), a new point \( q_{\text{new}} \) is created by moving a step \( \varepsilon \) toward \( q_{\text{rand}} \).  
-(In other words, one incremental step in the direction of \( q_{\text{rand}} \).)
-
----
-
-### (4) Collision Check
-
-$$
+**Collision / Corridor Check**
+\[
 q_{\text{new}} \in C_{\text{free}}
-$$
+\]
 
-Verify that \( q_{\text{new}} \) lies within the free configuration space \( C_{\text{free}} \).  
-If it violates the corridor boundary, discard \( q_{\text{new}} \).
-
-> Note: The closed track has no internal physical obstacles, but **the drivable corridor boundaries**
-> (left/right lane limits) function as constraints that must be respected.  
-> Thus, collision checking is implemented as an **in-corridor validity test**.
-
-**Segment-based collision test**
-
-$$
-\text{CollisionFree}(q_{\text{near}}, q_{\text{new}}) =
-\begin{cases}
-\text{True}, & \text{if } (1-s)q_{\text{near}} + s q_{\text{new}} \notin O,\; \forall s \in [0,1] \\
-\text{False}, & \text{otherwise}
-\end{cases}
-$$
-
-- \( O \): invalid region (outside the corridor)  
-- If no point on the segment between \( q_{\text{near}} \) and \( q_{\text{new}} \) lies inside \( O \) for all \( s \in [0,1] \), the motion is valid.
+Only collision-free edges inside the corridor are added to the tree.
 
 ---
 
-### (5) Tree Expansion and Node Addition
+## 3. Free-Space Modeling via SLAM Data
 
-$$
-T = T \cup \{ (q_{\text{near}}, q_{\text{new}}) \}
-$$
+### 3.1 Track Characteristics
 
-If valid, add the new node and edge to the tree.
+- Single outer boundary
+- No internal static obstacles
+- Visual traffic objects (lights, signs) do not define physical occupancy
 
----
-
-## 3. Definition of Free Space and Problem Recognition
-
-### 3.1 Structural Characteristics of the Track
-
-The track has only an **outer boundary**, with no internal physical obstacles.  
-While traffic lights and signs exist visually, the interior is essentially an **open empty space**, meaning that an **occupancy-grid representation** cannot accurately describe drivable regions.  
-Therefore, a conventional occupancy-based environment model has fundamental limitations for applying RRT.
+This makes **occupancy-grid-based RRT unsuitable**.
 
 ---
 
-### 3.2 Centerline Extraction via Cartographer SLAM
+### 3.2 Corridor Construction from Cartographer SLAM
 
-To overcome this issue, the **centerline coordinates** obtained from **Cartographer-based SLAM** during vehicle driving were used.  
-The centerline was laterally expanded by the lane width to generate left and right boundaries, modeling each track segment’s **Free Space** as a **polygonal corridor**.
-
----
-
-### 3.3 Problems of Whole-Track Free-Space Generation
-
-Initially, RRT was executed by forming a single free-space polygon using the entire track centerline.  
-However, the presence of **intersections**, **roundabouts**, and **bi-directional lanes** caused **overlaps and tangling** among free-space polygons.
-
-<p align="center"><img src="../images/rrt1.png" width="400"/></p>
-
-As a result:
-- The free-space definition became incomplete.  
-- RRT expansion behaved abnormally or extended beyond the valid track boundary.  
-- Numerous off-track trajectories were generated.
+- Extract centerline from Cartographer SLAM
+- Offset laterally by lane width
+- Generate **left/right lane boundaries**
+- Define **polygonal free-space corridors**
 
 ---
 
-## 4. Segment-wise Free-Space Division and RRT Execution
+### 3.3 Segment-wise Free Space Division
 
-To resolve these issues, the track was divided into multiple **segments**.  
-Each segment consists of a continuous portion of the centerline with a fixed arc length,  
-and an **independent free-space corridor** was modeled for each one.
+Using a single free-space polygon for the entire track caused:
+- Corridor overlaps at intersections
+- Invalid RRT expansion
+- Off-track trajectories
+
+**Solution:** Divide the track into multiple segments.
+
+Each segment:
+- Has its own corridor
+- Runs RRT independently
+- Produces a local feasible path
 
 ---
 
-### 4.1 Free-Space Modeling Procedure (Pseudo Code)
+### 3.4 Segment-wise RRT Execution (Pseudo Code)
 
-The following pseudo code summarizes how each segment’s Free Space was modeled using the waypoint data.  
-The actual implementation loads waypoint JSON files and processes them sequentially.
+```text
+Algorithm: RRT in Corridor C
+1. Initialize tree T with start node q_start
+2. for i = 1..N_max:
+     q_rand ← SampleFree(C)
+     q_near ← Nearest(T, q_rand)
+     q_new  ← Steer(q_near, q_rand, η)
+     if EdgeInCorridor(q_near, q_new, C):
+         AddNode(T, q_new)
+         AddEdge(T, q_near → q_new)
+         if ||q_new - q_goal|| < r_goal:
+             return BacktrackPath(T)
+3. return Failure
 
-Each segment includes the following steps:
-1. Load and merge waypoints.  
-2. Re-sample by arc length.  
-3. Generate left/right lane boundaries using the lane width.  
-4. Define the polygonal Free Space.
+```
 
-```python
-INPUT: files = sorted(glob("waypoints_*.json"), by natural order)
-PARAM: ds=0.05, lane_width=0.4
-OUTPUT: segments_free_space = [FreeSpace_i], centerline, left/right boundaries
+## 4. Path Post-Processing and Smoothing
 
-# 1) Load & stitch
-segments = [ load_json_xy(f) for f in files ]
-center_raw = stitch(segments)  # remove duplicated endpoints at joins
+### 4.1 Motivation
 
-# 2) Resample (arc-length uniform)
-centerline = resample_uniform(center_raw, step=ds)
+Raw RRT-generated paths exhibit several drawbacks when directly applied
+to autonomous vehicle driving:
 
-# 3) Lane boundaries via normal offsets
-tangent = normalize(gradient(centerline))
-normal  = rotate90(tangent)  # [-t_y, t_x]
-left_boundary  = centerline + 0.5 * lane_width * normal
-right_boundary = centerline - 0.5 * lane_width * normal
+- Discontinuous waypoints
+- Sharp turns with high curvature
+- Lack of smoothness required for stable lateral control
 
-# 4) Segmenting rules
-breaks = []
-for i from 1 to len(centerline)-2:
-    kappa = curvature(centerline, i)
-    dpsi  = heading(centerline, i) - heading(centerline, i-1)
-    if kappa > κ_thresh OR abs(dpsi) > ψ_thresh OR arc(i) - arc(last_break) > L_max:
-        breaks.append(i)
+Therefore, post-processing is required before the path can be executed
+by a real vehicle or simulation controller.
 
-segments_idx = pairwise([0] + breaks + [len(centerline)-1])
+---
 
-# 5) Free space polygons
-segments_free_space = []
-for (s, e) in segments_idx:
-    L = left_boundary[s:e+1]
-    R = right_boundary[s:e+1]
-    corridor = polygon( concatenate(L, reverse(R)) )
-    segments_free_space.append(corridor)
+### 4.2 Elastic-Band-Based Path Smoothing
+
+To address these issues, we apply an **Elastic-Band-based smoothing method**.
+The generated path is treated as a deformable band that iteratively minimizes
+a weighted energy function composed of:
+
+- **Path length (tension term)**
+- **Curvature smoothness**
+- **Boundary clearance**
+- **Attraction to centerline**
+
+Each waypoint is adjusted to reduce total energy while remaining inside
+the free-space corridor.
+
+This results in:
+
+- Continuous curvature
+- Reduced steering oscillations
+- Improved drivability under vehicle kinematic constraints
+
+---
+
+### 4.3 Final Global Path Construction
+
+After smoothing:
+
+- Each segment-level path becomes dynamically feasible
+- All segments are concatenated in sequence
+- A complete **global trajectory** covering the entire track is obtained
+
+The final output is stored as **JSON waypoint files**, which can be
+directly loaded into:
+
+- MATLAB/Simulink controllers
+- ROS2 trajectory-following nodes
+
+---
+
+## 5. Decision and Planning using DQN
+
+### 5.1 Problem Definition
+
+While RRT generates **geometrically feasible trajectories**, it does not
+decide **which mission objective should be visited next**.
+
+The **DQN-based decision module** addresses this by learning an optimal
+policy for mission-level planning.
+
+Its responsibilities include:
+
+- Selecting the next Pickup / Drop-off location
+- Avoiding cyclic or inefficient routes
+- Minimizing total mission cost
+
+---
+
+### 5.2 Graph-Based Environment Modeling
+
+The roadmap is abstracted as a **directed graph**:
+
+- Nodes represent intersections or mission points
+- Edges represent valid transitions between nodes
+
+The agent:
+
+- Starts at node 0
+- Sequentially visits assigned mission nodes
+- Terminates at the final hub
+
+---
+
+### 5.3 Optimal Q-Function
+
+The optimal action-value function is defined as:
+
+\[
+Q^*(s, a) = \max_\pi \mathbb{E}
+\left[ \sum_{t=0}^{\infty} \gamma^t r_t \mid s_0 = s, a_0 = a \right]
+\]
+
+---
+
+### 5.4 Q-Learning Update Rule
+
+The Q-value update rule is given by:
+
+\[
+Q(s, a) \leftarrow Q(s, a) +
+\alpha \left[ r + \gamma \max_{a'} Q(s', a') - Q(s, a) \right]
+\]
+
+---
+
+### 5.5 Deep Q-Network Approximation
+
+To handle large state spaces, a neural network is used to approximate
+the Q-function:
+
+\[
+Q(s, a; \theta) \approx Q^*(s, a)
+\]
+
+Stability is ensured through:
+
+- Experience replay
+- Target network updates
+- ε-greedy exploration strategy
+
+---
+
+### 5.6 Reward Design
+
+| Condition | Reward |
+|---------|--------|
+| Reach sub-goal | +100 |
+| Enter loop | −1000 |
+| Revisit node | −10 × visit count |
+| General movement | −1 |
+| Branch node | +5 |
+
+---
+
+### 5.7 Integration with RRT Paths
+
+- DQN outputs an **ordered sequence of nodes / segments**
+- Each segment corresponds to a **pre-generated RRT path**
+- Selected paths are concatenated into a mission trajectory
+
+This decoupling ensures:
+
+- Deterministic vehicle behavior
+- Stable learning
+- Real-time execution feasibility
+
+---
+
+## 6. Conclusion
+
+By combining:
+
+- **Sampling-based global planning (RRT)**
+- **Learning-based mission decision (DQN)**
+
+we construct a **hierarchical planning framework** that satisfies both
+geometric feasibility and decision optimality.
+
+This architecture:
+
+- Aligns with real-world autonomous driving systems
+- Enables modular testing and replacement
+- Meets the evaluation criteria of the Virtual Stage competition
+
 
