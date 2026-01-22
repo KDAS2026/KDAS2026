@@ -40,7 +40,8 @@ In other words, while embracing the stochastic exploration characteristic of RRT
 
 ## 2. Theoretical Background of RRT
 
-The core idea of RRT is to randomly sample a point in the search space, find the nearest node in the existing tree, and extend (steer) the tree from that node toward the sample by a small step Δq.  
+The core idea of RRT is to randomly sample a point in the search space, find the nearest node in the existing tree, and extend (steer) the tree from that node toward the sample by a small step Δq.
+
 Repeating this process rapidly expands the tree throughout the space until it reaches the goal region.
 
 ---
@@ -52,6 +53,7 @@ q_{\text{rand}} \sim U(Q)
 $$
 
 A random point \( q_{\text{rand}} \) is sampled within the search space \( Q \).
+
 ---
 
 ### (2) Nearest-Node Search
@@ -60,7 +62,8 @@ $$
 q_{\text{near}} = \underset{q_i \in T}{\arg\min}\, \text{dist}(q_i, q_{\text{rand}})
 $$
 
-Among all nodes currently in the tree, the one with the smallest distance to \( q_{\text{rand}} \) is selected.  
+Among all nodes currently in the tree, the one with the smallest distance to \( q_{\text{rand}} \) is selected.
+
 The distance metric can be Euclidean or any metric suitable for the configuration space.
 
 ---
@@ -72,8 +75,9 @@ q_{\text{new}} = q_{\text{near}} +
 \frac{(q_{\text{rand}} - q_{\text{near}})}{\|q_{\text{rand}} - q_{\text{near}}\|} \cdot \varepsilon
 $$
 
-From \( q_{\text{near}} \), a new point \( q_{\text{new}} \) is created by moving a step \( \varepsilon \) toward \( q_{\text{rand}} \).  
-(In other words, one incremental step in the direction of \( q_{\text{rand}} \).)
+From \( q_{\text{near}} \), a new point \( q_{\text{new}} \) is created by moving a step \( \varepsilon \) toward \( q_{\text{rand}} \).
+
+In other words, one incremental step is taken in the direction of \( q_{\text{rand}} \).
 
 ---
 
@@ -83,10 +87,12 @@ $$
 q_{\text{new}} \in C_{\text{free}}
 $$
 
-Verify that \( q_{\text{new}} \) lies within the free configuration space \( C_{\text{free}} \).  
+Verify that \( q_{\text{new}} \) lies within the free configuration space \( C_{\text{free}} \).
+
 If it violates the corridor boundary, discard \( q_{\text{new}} \).
 
-> Note: The closed track has no internal physical obstacles, but **the drivable corridor boundaries**
+> **Note**  
+> The closed track has no internal physical obstacles, but the **drivable corridor boundaries**
 > (left/right lane limits) function as constraints that must be respected.  
 > Thus, collision checking is implemented as an **in-corridor validity test**.
 
@@ -100,7 +106,7 @@ $$
 \end{cases}
 $$
 
-- \( O \): invalid region (outside the corridor)  
+- \( O \): invalid region (outside the corridor)
 - If no point on the segment between \( q_{\text{near}} \) and \( q_{\text{new}} \) lies inside \( O \) for all \( s \in [0,1] \), the motion is valid.
 
 ---
@@ -114,6 +120,7 @@ $$
 If valid, add the new node and edge to the tree.
 
 ---
+
 
 ## 3. Definition of Free Space and Problem Recognition
 
