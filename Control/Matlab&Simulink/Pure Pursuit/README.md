@@ -53,42 +53,43 @@ The geometric relationship used in this controller is illustrated below.
 
 Let:
 
-- \( l_d \) : Look-Ahead Distance  
-- \( \alpha \) : Angle between vehicle heading and target point  
-- \( R \) : Radius of curvature  
+- $l_d$ : Look-Ahead Distance  
+- $\alpha$ : Angle between vehicle heading and target point  
+- $R$ : Radius of curvature  
 
 From the geometric relationship,
 
-\[
+$$
 \frac{l_d}{\sin(2\alpha)} = \frac{R}{\sin\left(\frac{\pi}{2} - \alpha\right)}
-\]
+$$
 
 which simplifies to:
 
-\[
+$$
 \frac{l_d}{\sin(\alpha)} = 2R
-\]
+$$
 
-Thus, the curvature \( k \) is:
+Thus, the curvature $k$ is:
 
-\[
+$$
 k = \frac{1}{R} = \frac{2\sin(\alpha)}{l_d}
-\]
+$$
 
-Let \( L \) be the wheelbase and \( \delta \) the steering angle.  
+Let $L$ be the wheelbase and $\delta$ the steering angle.  
 Using the bicycle model relationship:
 
-\[
+$$
 R = \frac{L}{\tan(\delta)}
-\]
+$$
 
-the final steering command is computed as:
+The final steering command is computed as:
 
-\[
+$$
 \delta = \arctan\left(\frac{2L\sin(\alpha)}{l_d}\right)
-\]
+$$
 
-The controller directly computes the steering angle using this formulation based on the target point and Look-Ahead Distance provided by the Helper node.
+The controller directly computes the steering angle using this formulation
+based on the target point and Look-Ahead Distance provided by the Helper node.
 
 ---
 
