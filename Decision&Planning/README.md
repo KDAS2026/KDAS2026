@@ -52,7 +52,6 @@ q_{\text{rand}} \sim U(Q)
 $$
 
 A random point \( q_{\text{rand}} \) is sampled within the search space \( Q \).
-
 ---
 
 ### (2) Nearest-Node Search
