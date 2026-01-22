@@ -43,7 +43,6 @@ The geometric relationship used in this controller is illustrated below.
 
 <table>
   <tr>
-    <td align="center">
       <img src="../../../images/purepursuit.png" alt="Pure Pursuit Algorithm" width="600"/><br/>
       <b>Pure Pursuit Algorithm</b>
     </td>
