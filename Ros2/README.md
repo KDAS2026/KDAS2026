@@ -4,6 +4,12 @@
 
 This repository contains the source code for the **QCar2 Autonomous Driving System** built on **ROS2 Humble Hawksbill**. It seamlessly integrates **Perception, Planning, and Control** modules to implement real-time End-to-End autonomous driving.
 
+<div align="center">
+  <img src="../images/ROS1.gif" alt="ROS" width="700" />
+  <br/>
+  <b>Pure Pursuit Steering Control Result</b>
+</div>
+
 ##  Project Overview
 
 To overcome the structural limitations of legacy ROS1 (such as dependency on a central Master Node) and to ensure the reliable integration of various sensors and control modules, we adopted **ROS2 Humble** as our middleware.
