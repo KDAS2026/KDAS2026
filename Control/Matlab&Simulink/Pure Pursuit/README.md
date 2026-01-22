@@ -169,8 +169,15 @@ relationship between the vehicle and the reference path.
       <b>Pure Pursuit Steering Control Result</b>
     </td>
   </tr>
+  <tr>
+    <td align="center">
+      <img src="../../../images/ControlMat.gif"
+           alt="Simulink Control Structure"
+           width="600"/><br/>
+      <b>Simulink-Based Steering Control Structure</b>
+    </td>
+  </tr>
 </table>
-
 As shown in the figure, the controller demonstrates stable path-following performance
 while smoothly converging toward the target path. Steering commands are generated
 without oscillatory behavior, and the vehicle maintains consistent tracking even
