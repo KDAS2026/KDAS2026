@@ -142,7 +142,7 @@ The centerline was laterally expanded by the lane width to generate left and rig
 Initially, RRT was executed by forming a single free-space polygon using the entire track centerline.  
 However, the presence of **intersections**, **roundabouts**, and **bi-directional lanes** caused **overlaps and tangling** among free-space polygons.
 
-<p align="center"><img src="../images/rrt1.png" width="700"/></p>
+<p align="center"><img src="../images/rrt1.png" width="400"/></p>
 
 As a result:
 - The free-space definition became incomplete.  
@@ -485,19 +485,35 @@ This allows broad exploration in early episodes and convergence to stable exploi
 
 ### 2.4 Network Architecture and Hyperparameters
 
-### 2.4 Network Architecture and Hyperparameters
+This section summarizes the neural network architecture of the DQN agent and the
+training hyperparameters used in the experiments.
+
+---
+
+#### Network Architecture
+
+| Component | Description | Value |
+|:----------|:------------|:-----:|
+| Network Type | Function approximator | Multi-Layer Perceptron (MLP) |
+| Structure | Layer configuration | Input – Hidden – Output |
+| Hidden Layers | Number of hidden layers | 1 |
+| Hidden Units | Neurons in hidden layer | 64 |
+| Activation | Hidden-layer activation function | ReLU |
+| Output | Network output | Q-values for each action |
+
+---
+
+#### Training Hyperparameters
 
 | Parameter | Description | Value |
 |:----------|:------------|:-----:|
-| Structure | Network topology | 2-layer MLP (Input–Hidden–Output) |
-| Activation | Hidden-layer activation | ReLU |
-| Loss Function | Training loss | MSE |
-| Optimizer | Parameter update method | Gradient Descent |
+| Loss Function | Temporal-difference loss | MSE |
+| Optimizer | Parameter update rule | Gradient Descent |
 | Learning Rate (α) | Step size | 0.01 |
-| Discount Factor (γ) | Reward discount | 0.9 |
-| Hidden Units | Neurons per hidden layer | 64 |
+| Discount Factor (γ) | Future reward discount | 0.9 |
 | Episodes | Total training episodes | 5000 |
 | Max Steps per Episode | Episode horizon | 100 |
+|
 
 
 Fallback mechanism:  
@@ -551,7 +567,7 @@ It sequentially achieved all sub-goals, validating scalability for more complex 
 The generated paths were saved as segmented files (`p1`, `p2`, `p3`, …) and also merged into a total integrated path.
 
 <p align="center">
-  <img src="../../../../images/dqn5.png" alt="JSON structure for DQN path" width="200"/>
+  <img src="../images/dqn5.png" alt="JSON structure for DQN path" width="200"/>
 </p>
 
 
