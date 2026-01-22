@@ -151,3 +151,27 @@ This Pure Pursuit steering control implementation represents a **practical, qual
 The resulting pipeline satisfies the qualification-stage requirements for  
 **clarity, reproducibility, and explainability of control logic**.
 
+---
+
+## Results
+
+The following figure shows the actual steering behavior of the Pure Pursuit controller
+in the qualification simulation environment.  
+The controller continuously computes steering commands based on the geometric
+relationship between the vehicle and the reference path.
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="../../../images/control.gif"
+           alt="Pure Pursuit Control Result"
+           width="700"/><br/>
+      <b>Pure Pursuit Steering Control Result</b>
+    </td>
+  </tr>
+</table>
+
+As shown in the figure, the controller demonstrates stable path-following performance
+while smoothly converging toward the target path. Steering commands are generated
+without oscillatory behavior, and the vehicle maintains consistent tracking even
+through curved sections of the trajectory.
