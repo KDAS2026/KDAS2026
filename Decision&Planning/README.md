@@ -138,7 +138,7 @@ The centerline was laterally expanded by the lane width to generate left and rig
 Initially, RRT was executed by forming a single free-space polygon using the entire track centerline.  
 However, the presence of **intersections**, **roundabouts**, and **bi-directional lanes** caused **overlaps and tangling** among free-space polygons.
 
-<p align="center"><img src="../../../../images/rrt1.png" width="700"/></p>
+<p align="center"><img src="../images/rrt1.png" width="700"/></p>
 
 As a result:
 - The free-space definition became incomplete.  
@@ -207,11 +207,11 @@ for (s, e) in segments_idx:
 
 Below are representative examples of **Free-Space modeling results** for selected portions of the track.
 
-![Segment free space example 1](../images/rrt2.png)
-![Segment free space example 2](../images/rrt3.png)
-![Segment free space example 3](../images/rrt3.png)
-
-In the figures above:
+<table><tr>
+<td><img src="../images/rrt2.png" width="320"/></td>
+<td><img src="../images/rrt3.png" width="320"/></td>
+<td><img src="../images/rrt3.png" width="320"/></td>
+</tr></table>
 
 - The **black line** represents the extracted **centerline**.
 - The **blue and green dashed lines** indicate the **left and right lane boundaries**, respectively.
@@ -245,10 +245,11 @@ Algorithm: Rapidly-exploring Random Tree (RRT)
 ```
 ## 5.2 RRT Execution Results
 
-| | | |
-|---|---|---|
-| ![](../../../../images/rrt4.png) | ![](../../../../images/rrt5.png) | ![](../../../../images/rrt6.png) |
-
+<table><tr>
+<td><img src="../images/rrt4.png" width="320"/></td>
+<td><img src="../images/rrt5.png" width="320"/></td>
+<td><img src="../images/rrt6.png" width="320"/></td>
+</tr></table>
 The figures above visualize **RRT-based path generation** for several different segments.
 
 - **Green area**: drivable corridor  
@@ -261,9 +262,10 @@ The figures above visualize **RRT-based path generation** for several different 
 
 ## 5.3 Result Analysis and Limitations
 
-| | |
-|---|---|
-| ![](../../../../images/rrt7.png) | ![](../../../../images/rrt8.png) |
+<table><tr>
+<td><img src="../images/rrt7.png" width="360"/></td>
+<td><img src="../images/rrt8.png" width="360"/></td>
+</tr></table>
 
 Through **segment-wise RRT generation**, the algorithm successfully produced feasible paths that reached the goal quickly.  
 However, because RRT relies on **random sampling**, multiple runs over the same segment yielded slightly different trajectories.
@@ -312,7 +314,7 @@ Repeat until convergence:
 
 | Before | After |
 |---|---|
-| ![](../../../../images/rrt9.png) | ![](../../../../images/rrt10.png) |
+| ![](../images/rrt10.png) | ![](../images/rrt11.png) |
 
 - **Left**: Raw RRT result (discontinuous path)  
 - **Right**: Clearance-aware Elastic-band smoothing result (smooth and drivable path)
@@ -329,7 +331,7 @@ After smoothing:
 
 ## 6.3 Global Path Visualization
 
-![](../../../../images/rrt11.png)
+<p align="center"><img src="../images/rrt12.png" width="720"/></p>
 
 The figure above illustrates the **global path visualization** across the entire track.
 
