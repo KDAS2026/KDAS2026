@@ -52,7 +52,7 @@ $$
 q_{\mathrm{rand}} \sim U(Q)
 $$
 
-A random point \( q_{\mathrm{rand}} \) is sampled within the search space \( Q \).
+A random point `q_rand` is sampled within the search space `Q`.
 
 ---
 
@@ -64,7 +64,7 @@ q_{\mathrm{near}} =
 \mathrm{dist}(q_i, q_{\mathrm{rand}})
 $$
 
-Among all nodes currently in the tree, the one with the smallest distance to \( q_{\mathrm{rand}} \) is selected.
+Among all nodes currently in the tree, the node with the smallest distance to `q_rand` is selected.
 
 The distance metric can be Euclidean or any metric suitable for the configuration space.
 
@@ -80,9 +80,9 @@ q_{\mathrm{near}} +
 \cdot \varepsilon
 $$
 
-From \( q_{\mathrm{near}} \), a new point \( q_{\mathrm{new}} \) is created by moving a step \( \varepsilon \) toward \( q_{\mathrm{rand}} \).
+From `q_near`, a new point `q_new` is created by moving a step `ε` toward `q_rand`.
 
-In other words, one incremental step is taken in the direction of \( q_{\mathrm{rand}} \).
+In other words, one incremental step is taken in the direction of the sampled point.
 
 ---
 
@@ -92,9 +92,9 @@ $$
 q_{\mathrm{new}} \in C_{\mathrm{free}}
 $$
 
-Verify that \( q_{\mathrm{new}} \) lies within the free configuration space \( C_{\mathrm{free}} \).
+Verify that `q_new` lies within the free configuration space `C_free`.
 
-If it violates the corridor boundary, discard \( q_{\mathrm{new}} \).
+If it violates the corridor boundary, discard `q_new`.
 
 > **Note**  
 > The closed track has no internal physical obstacles, but the **drivable corridor boundaries**
@@ -113,8 +113,9 @@ $$
 \end{cases}
 $$
 
-- \( O \): invalid region (outside the corridor)
-- If no point on the segment between \( q_{\mathrm{near}} \) and \( q_{\mathrm{new}} \) lies inside \( O \) for all \( s \in [0,1] \), the motion is valid.
+- `O`: invalid region (outside the corridor)
+- If no point on the segment between `q_near` and `q_new` lies inside `O` for all `s ∈ [0,1]`,
+  the motion is considered valid.
 
 ---
 
@@ -128,16 +129,6 @@ If valid, add the new node and edge to the tree.
 
 ---
 
-
-## 3. Definition of Free Space and Problem Recognition
-
-### 3.1 Structural Characteristics of the Track
-
-The track has only an **outer boundary**, with no internal physical obstacles.  
-While traffic lights and signs exist visually, the interior is essentially an **open empty space**, meaning that an **occupancy-grid representation** cannot accurately describe drivable regions.  
-Therefore, a conventional occupancy-based environment model has fundamental limitations for applying RRT.
-
----
 
 ### 3.2 Centerline Extraction via Cartographer SLAM
 
