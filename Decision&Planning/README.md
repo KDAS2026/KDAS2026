@@ -210,7 +210,7 @@ Below are representative examples of **Free-Space modeling results** for selecte
 <table><tr>
 <td><img src="../images/rrt2.png" width="320"/></td>
 <td><img src="../images/rrt3.png" width="320"/></td>
-<td><img src="../images/rrt3.png" width="320"/></td>
+<td><img src="../images/rrt4.png" width="320"/></td>
 </tr></table>
 
 - The **black line** represents the extracted **centerline**.
@@ -246,9 +246,9 @@ Algorithm: Rapidly-exploring Random Tree (RRT)
 ## 5.2 RRT Execution Results
 
 <table><tr>
-<td><img src="../images/rrt4.png" width="320"/></td>
 <td><img src="../images/rrt5.png" width="320"/></td>
 <td><img src="../images/rrt6.png" width="320"/></td>
+<td><img src="../images/rrt7.png" width="320"/></td>
 </tr></table>
 The figures above visualize **RRT-based path generation** for several different segments.
 
@@ -263,8 +263,8 @@ The figures above visualize **RRT-based path generation** for several different 
 ## 5.3 Result Analysis and Limitations
 
 <table><tr>
-<td><img src="../images/rrt7.png" width="360"/></td>
 <td><img src="../images/rrt8.png" width="360"/></td>
+<td><img src="../images/rrt9.png" width="360"/></td>
 </tr></table>
 
 Through **segment-wise RRT generation**, the algorithm successfully produced feasible paths that reached the goal quickly.  
@@ -331,7 +331,7 @@ After smoothing:
 
 ## 6.3 Global Path Visualization
 
-<p align="center"><img src="../images/rrt12.png" width="720"/></p>
+<p align="center"><img src="../images/rrt12.png" width="450"/></p>
 
 The figure above illustrates the **global path visualization** across the entire track.
 
@@ -378,7 +378,7 @@ Ultimately, this approach demonstrates the potential of linking:
 
 thereby improving both the **efficiency** and **practicality** of autonomous path planning.
 
-![](../../../../images/rrt12.png)
+
 
 ## Part B. Planning and Decision (DQN): Optimal Node Visit Order
 
@@ -393,9 +393,9 @@ The algorithm was developed for an autonomous taxi scenario, where the vehicle m
 
 The **Q-function** defines the expected cumulative reward obtainable from a given state–action pair \((s, a)\):
 
-\[
+$$
 Q^*(s, a) = \max_\pi \, \mathbb{E} \left[ \sum_{t=0}^{\infty} \gamma^t r_t \; \middle| \; s_0 = s, \, a_0 = a, \, \pi \right]
-\]
+$$
 
 ---
 
@@ -403,9 +403,9 @@ Q^*(s, a) = \max_\pi \, \mathbb{E} \left[ \sum_{t=0}^{\infty} \gamma^t r_t \; \m
 
 The **Q-learning** algorithm iteratively updates the state–action value to approximate the optimal policy:
 
-\[
+$$
 Q(s, a) \leftarrow Q(s, a) + \alpha \left[ r + \gamma \max_{a'} Q(s', a') - Q(s, a) \right]
-\]
+$$
 
 ---
 
@@ -413,9 +413,10 @@ Q(s, a) \leftarrow Q(s, a) + \alpha \left[ r + \gamma \max_{a'} Q(s', a') - Q(s,
 
 To handle high-dimensional state spaces, Q-functions are approximated using neural networks:
 
-\[
+$$
 Q(s, a; \theta) \approx Q^*(s, a)
-\]
+$$
+
 
 Key components:
 
@@ -429,9 +430,9 @@ Key components:
 
 The target value incorporates the reward and discounted future reward estimate:
 
-\[
+$$
 \text{target}[a] = r + \gamma \max_{a'} Q(s', a'; \theta^-)
-\]
+$$
 
 ---
 
@@ -439,10 +440,10 @@ The target value incorporates the reward and discounted future reward estimate:
 
 The DQN minimizes the mean-squared error between the target network and the current Q-value network:
 
-\[
+$$
 L(\theta) = \mathbb{E}_{(s, a, r, s') \sim D} 
 \left[ \big( r + \gamma \max_{a'} Q(s', a'; \theta^-) - Q(s, a; \theta) \big)^2 \right]
-\]
+$$
 
 ---
 
