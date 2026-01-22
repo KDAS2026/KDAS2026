@@ -485,17 +485,20 @@ This allows broad exploration in early episodes and convergence to stable exploi
 
 ### 2.4 Network Architecture and Hyperparameters
 
+### 2.4 Network Architecture and Hyperparameters
+
 | Parameter | Description | Value |
 |:----------|:------------|:-----:|
-| Structure | 2-layer MLP (Input–Hidden–Output) | — |
-| Activation | ReLU | — |
-| Loss Function | MSE (Mean Squared Error) | — |
-| Optimizer | Gradient Descent | — |
-| Learning Rate (α) | — | 0.01 |
-| Discount Factor (γ) | — | 0.9 |
-| Hidden Units | — | 64 |
-| Episodes | — | 5000 |
-| Max Steps per Episode | — | 100 |
+| Structure | Network topology | 2-layer MLP (Input–Hidden–Output) |
+| Activation | Hidden-layer activation | ReLU |
+| Loss Function | Training loss | MSE |
+| Optimizer | Parameter update method | Gradient Descent |
+| Learning Rate (α) | Step size | 0.01 |
+| Discount Factor (γ) | Reward discount | 0.9 |
+| Hidden Units | Neurons per hidden layer | 64 |
+| Episodes | Total training episodes | 5000 |
+| Max Steps per Episode | Episode horizon | 100 |
+
 
 Fallback mechanism:  
 If no valid goal is reached, a **BFS-based shortest path** is applied to guarantee that a valid route is always generated.
@@ -547,7 +550,10 @@ It sequentially achieved all sub-goals, validating scalability for more complex 
 
 The generated paths were saved as segmented files (`p1`, `p2`, `p3`, …) and also merged into a total integrated path.
 
-![JSON structure for DQN path](../images/dqn5.png)
+<p align="center">
+  <img src="../../../../images/dqn5.png" alt="JSON structure for DQN path" width="200"/>
+</p>
+
 
 This **segment-based structure** allows independent learning and validation of each route segment while maintaining full-path integration.  
 The resulting JSON files can be directly loaded into **MATLAB Simulink control modules** or **ROS2 helper nodes** for real-time trajectory tracking.
