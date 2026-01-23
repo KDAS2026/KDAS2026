@@ -23,7 +23,7 @@ SCNN was selected because it provides:
 - Segmentation-based output suitable for geometric post-processing  
 - Real-time feasibility for ROS2-based autonomous pipelines  
 
-<img src="../images/SCNN2.png" width="800"/>
+<img src="/images/SCNN2.png" width="800"/>
 
 ---
 
@@ -37,13 +37,13 @@ To address this, we performed **domain adaptation through fine-tuning**:
 - Higher-level layers are fine-tuned using **QLabs-specific lane data**  
 - This improves lane continuity and stability in the target domain
 
-<img src="../images/SCNN3.png" width="800"/>
+<img src="/images/SCNN3.png" width="800"/>
 
 Feature map inspection during training showed that:
 - Early layers remained largely unchanged  
 - Later layers increasingly specialized to lane boundaries and curvature
 
-<img src="../images/SCNN4.png" width="800"/>
+<img src="/images/SCNN4.png" width="800"/>
 
 ---
 
@@ -58,7 +58,7 @@ The dataset was constructed directly from QLabs driving scenarios.
 - Only lane markings are annotated to focus perception on road geometry  
 - Split: 80% training, 20% validation  
 
-<img src="../images/SCNN5.png" width="800"/>
+<img src="/images/SCNN5.png" width="800"/>
 
 ---
 
@@ -77,7 +77,7 @@ The dataset was constructed directly from QLabs driving scenarios.
 
 Training curves demonstrated stable convergence after fine-tuning.
 
-<img src="../images/SCNN6.png" width="800"/>
+<img src="/images/SCNN6.png" width="800"/>
 
 ---
 
@@ -92,7 +92,7 @@ The raw SCNN output mask is transformed into a structured lane representation:
 5. Centerline computation  
 6. Temporal smoothing  
 
-<img src="../images/SCNN8.png" width="800"/>
+<img src="/images/SCNN8.png" width="800"/>
 
 This process converts pixel-level perception into system-level lane geometry suitable for autonomous driving.
 
@@ -106,7 +106,7 @@ The extracted centerline is interpreted as a sequence of waypoints:
 - Transformed into a consistent coordinate frame  
 - Published via ROS2 topics for downstream planning and control  
 
-<img src="../images/SCNN9.png" width="800"/>
+<img src="/images/SCNN9.png" width="800"/>
 
 ---
 
@@ -119,7 +119,7 @@ The extracted centerline is interpreted as a sequence of waypoints:
 **Quantitative**
 - Validation mIoU consistently in the mid-0.8 range  
 
-<img src="../images/SCNN1.gif" width="800"/>
+<img src="/images/SCNN1.gif" width="800"/>
 
 ---
 
