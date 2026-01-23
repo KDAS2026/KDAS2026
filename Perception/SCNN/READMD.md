@@ -58,7 +58,7 @@ The dataset was constructed directly from QLabs driving scenarios.
 - Only lane markings are annotated to focus perception on road geometry  
 - Split: 80% training, 20% validation  
 
-<img src="/images/SCNN5.png" width="800"/>
+<img src="/images/4SCNN.png" width="800"/>
 
 ---
 
@@ -77,7 +77,7 @@ The dataset was constructed directly from QLabs driving scenarios.
 
 Training curves demonstrated stable convergence after fine-tuning.
 
-<img src="/images/SCNN6.png" width="800"/>
+<img src="/images/SCNN5.png" width="800"/>
 
 ---
 
