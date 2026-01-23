@@ -92,7 +92,9 @@ The raw SCNN output mask is transformed into a structured lane representation:
 5. Centerline computation  
 6. Temporal smoothing  
 
-<img src="/images/SCNN8.png" width="800"/>
+| Before | After |
+|---|---|
+| ![](/images/SCNN7.png) | ![](/images/SCNN8.png) |
 
 This process converts pixel-level perception into system-level lane geometry suitable for autonomous driving.
 
