@@ -8,7 +8,7 @@ SCNN enhances conventional CNNs by propagating spatial information along rows an
 The network outputs a **binary lane segmentation mask**, which is post-processed to extract left/right lane boundaries and a **drivable centerline**.  
 This centerline represents a high-level interpretation of road geometry and is shared with downstream modules for planning and control.
 
-<img src="../images/SCNN1.gif" width="800"/>
+<img src="/images/SCNN1.gif" width="800"/>
 
 ---
 
