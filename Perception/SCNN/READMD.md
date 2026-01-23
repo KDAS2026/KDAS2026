@@ -49,7 +49,7 @@ Feature map inspection during training showed that:
 <p align="center">
   <img src="/images/SCNN4.png" width="600"/>
 </p>
----
+
 
 ## 4. Dataset Construction
 
@@ -85,7 +85,7 @@ The dataset was constructed directly from QLabs driving scenarios.
 </table>
 
 </div>
----
+
 
 ## 5. Training Pipeline
 
