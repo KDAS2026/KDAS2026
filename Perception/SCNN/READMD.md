@@ -37,7 +37,9 @@ To address this, we performed **domain adaptation through fine-tuning**:
 - Higher-level layers are fine-tuned using **QLabs-specific lane data**  
 - This improves lane continuity and stability in the target domain
 
-<img src="/images/SCNN3.png" width="400"/>
+<p align="center">
+  <img src="/images/SCNN3.png" width="500"/>
+</p>
 
 Feature map inspection during training showed that:
 - Early layers remained largely unchanged  
