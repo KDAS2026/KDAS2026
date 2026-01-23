@@ -45,8 +45,10 @@ Feature map inspection during training showed that:
 - Early layers remained largely unchanged  
 - Later layers increasingly specialized to lane boundaries and curvature
 
-<img src="/images/SCNN4.png" width="500"/>
 
+<p align="center">
+  <img src="/images/SCNN4.png" width="600"/>
+</p>
 ---
 
 ## 4. Dataset Construction
@@ -60,8 +62,25 @@ The dataset was constructed directly from QLabs driving scenarios.
 - Only lane markings are annotated to focus perception on road geometry  
 - Split: 80% training, 20% validation  
 
-<img src="/images/4SCNN.png" width="400"/>
 
+<table>
+  <tr>
+    <td align="center">
+      <img src="/image/4SCNN.png" width="300"><br>
+    </td>
+    <td align="center">
+      <img src="/image/1SCNN.png" width="300"><br>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="/image/2SCNN.png" width="300"><br>
+    </td>
+    <td align="center">
+      <img src="/image/3SCNN.png" width="300"><br>
+    </td>
+  </tr>
+</table>
 ---
 
 ## 5. Training Pipeline
@@ -79,7 +98,11 @@ The dataset was constructed directly from QLabs driving scenarios.
 
 Training curves demonstrated stable convergence after fine-tuning.
 
-<img src="/images/SCNN5.png" width="400"/>
+
+<p align="center">
+  <img src="/images/SCNN5.png" width="400"/>
+</p>
+
 
 ---
 
@@ -110,8 +133,9 @@ The extracted centerline is interpreted as a sequence of waypoints:
 - Transformed into a consistent coordinate frame  
 - Published via ROS2 topics for downstream planning and control  
 
-<img src="/images/SCNN9.png" width="800"/>
-
+<p align="center">
+  <img src="/images/SCNN9.png" width="800"/>
+</p>
 ---
 
 ## 8. Evaluation Results
@@ -122,6 +146,7 @@ The extracted centerline is interpreted as a sequence of waypoints:
 
 **Quantitative**
 - Validation mIoU consistently in the mid-0.8 range  
+
 
 <img src="/images/SCNN1.gif" width="800"/>
 
