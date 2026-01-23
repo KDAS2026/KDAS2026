@@ -37,13 +37,13 @@ To address this, we performed **domain adaptation through fine-tuning**:
 - Higher-level layers are fine-tuned using **QLabs-specific lane data**  
 - This improves lane continuity and stability in the target domain
 
-<img src="/images/SCNN3.png" width="800"/>
+<img src="/images/SCNN3.png" width="400"/>
 
 Feature map inspection during training showed that:
 - Early layers remained largely unchanged  
 - Later layers increasingly specialized to lane boundaries and curvature
 
-<img src="/images/SCNN4.png" width="800"/>
+<img src="/images/SCNN4.png" width="500"/>
 
 ---
 
@@ -58,7 +58,7 @@ The dataset was constructed directly from QLabs driving scenarios.
 - Only lane markings are annotated to focus perception on road geometry  
 - Split: 80% training, 20% validation  
 
-<img src="/images/4SCNN.png" width="800"/>
+<img src="/images/4SCNN.png" width="400"/>
 
 ---
 
@@ -77,7 +77,7 @@ The dataset was constructed directly from QLabs driving scenarios.
 
 Training curves demonstrated stable convergence after fine-tuning.
 
-<img src="/images/SCNN5.png" width="800"/>
+<img src="/images/SCNN5.png" width="400"/>
 
 ---
 
