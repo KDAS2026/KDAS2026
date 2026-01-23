@@ -7,25 +7,41 @@
 ## 1. SLAM & Localization Architecture
 
 ### 1.1 Visual Verification (Rviz Visualization)
+
+
 <p align="center">
-  <img src="../../images/localization.png" alt="Labeling examples" width="450"/>
+  <img src="../../images/localization_rviz2.png" alt="Labeling examples" width="450"/>
 </p>
+
+
 **1. Coordinate Reference (0,0)**
+
+
 <p align="center">
   <img src="../../images/tf3.png" alt="Labeling examples" width="450"/>
 </p>
+
+
 *  map 프레임의 원점(0, 0)을 기준으로 차량의 전역 좌표가 실시간으로 추정되는 모습입니다.
 
 **2. TF Connectivity**
+
+
 <p align="center">
   <img src="../../images/tf6.png" alt="Labeling examples" width="450"/>
 </p>
+
+
 *  Cartographer가 발행하는 `map` 좌표계와 차량의 `base_link`가 TF 트리를 통해 유기적으로 연결되어 있음을 검증했습니다.
 
 **3. Lidar & Map Alignment**
+
+
 <p align="center">
   <img src="../../images/tf2.png" alt="Labeling examples" width="450"/>
 </p>
+
+
 *  실시간 라이다 스캔 데이터와 생성된 지도가 오차 없이 정합(Matching)되어, 정밀한 위치 추정(Localization)이 수행되고 있음을 보여줍니다.
 
 ---
@@ -40,6 +56,12 @@
 
 #### 1.2.2 Rigorous TF Definition
 * **Implementation**: LiDAR가 차량의 중심(`base_link`)으로부터 X축으로 0.1m 전진 배치되어 있고, Z축 기준 180도(3.14 rad) 회전되어 장착된 하드웨어 구속 조건을 `tf2_ros::TransformBroadcaster`를 통해 엄밀하게 정의했습니다.
+
+
+<p align="center">
+  <img src="../../images/tf2.png" alt="Labeling examples" width="450"/>
+</p>
+
 
 ---
 
