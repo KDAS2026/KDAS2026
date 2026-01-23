@@ -63,24 +63,27 @@ The dataset was constructed directly from QLabs driving scenarios.
 - Split: 80% training, 20% validation  
 
 
+<div align="center">
+
 <table>
   <tr>
     <td align="center">
-      <img src="/image/4SCNN.png" width="300"><br>
+      <img src="images/4SCNN.png" width="300">
     </td>
     <td align="center">
-      <img src="/image/1SCNN.png" width="300"><br>
+      <img src="images/1SCNN.png" width="300">
     </td>
   </tr>
   <tr>
     <td align="center">
-      <img src="/image/2SCNN.png" width="300"><br>
+      <img src="images/2SCNN.png" width="300">
     </td>
     <td align="center">
-      <img src="/image/3SCNN.png" width="300"><br>
+      <img src="images/3SCNN.png" width="300">
     </td>
   </tr>
 </table>
+
 ---
 
 ## 5. Training Pipeline
