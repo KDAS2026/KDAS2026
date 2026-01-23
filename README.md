@@ -4,7 +4,7 @@
 <div align="center">
   <img src="images/kdasmain.gif" alt="KDAS Main" width="800"/>
 </div>
-# KDAS – 국민대학교 자율주행 시스템
+
 
 ## Introduction
 
