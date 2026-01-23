@@ -7,17 +7,25 @@
 ## 1. SLAM & Localization Architecture
 
 ### 1.1 Visual Verification (Rviz Visualization)
-
+<p align="center">
+  <img src="../../images/localization.png" alt="Labeling examples" width="450"/>
+</p>
 **1. Coordinate Reference (0,0)**
-* **(Visual)**: Rviz 상에서 Grid의 중심 혹은 map 프레임의 원점에 RGB 축 화살표가 표시된 모습.
+<p align="center">
+  <img src="../../images/tf3.png" alt="Labeling examples" width="450"/>
+</p>
 *  map 프레임의 원점(0, 0)을 기준으로 차량의 전역 좌표가 실시간으로 추정되는 모습입니다.
 
 **2. TF Connectivity**
-* **(Visual)**: `map` -> `odom` -> `base_link` -> `base_scan`으로 이어지는 TF 트리가 끊김 없이 연결된 모습 (또는 TF Tree 그래프).
+<p align="center">
+  <img src="../../images/tf6.png" alt="Labeling examples" width="450"/>
+</p>
 *  Cartographer가 발행하는 `map` 좌표계와 차량의 `base_link`가 TF 트리를 통해 유기적으로 연결되어 있음을 검증했습니다.
 
 **3. Lidar & Map Alignment**
-* **(Visual)**: 흰색/검은색으로 생성된 Occupancy Grid Map 위에, 실시간 붉은색/초록색 LaserScan 점들이 벽면과 일치하게 겹쳐 있는 모습.
+<p align="center">
+  <img src="../../images/tf2.png" alt="Labeling examples" width="450"/>
+</p>
 *  실시간 라이다 스캔 데이터와 생성된 지도가 오차 없이 정합(Matching)되어, 정밀한 위치 추정(Localization)이 수행되고 있음을 보여줍니다.
 
 ---
