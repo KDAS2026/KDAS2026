@@ -228,7 +228,7 @@ Planning 및 Control 단계에서의 행동 선택에 필요한 입력으로 사
 차량은 지도 상에서 자신의 위치를 이해하고,  
 선택된 주행 전략에 따라 경로를 생성 및 수정합니다.
 
-- LiDAR 기반 SLAM을 이용한 위치 추정  
+- LiDAR 기반 Cartographer SLAM을 이용한 위치 추정  
 - waypoint 기반 경로 생성 및 갱신  
 
 ---
