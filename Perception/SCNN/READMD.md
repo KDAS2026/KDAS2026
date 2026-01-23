@@ -84,6 +84,7 @@ The dataset was constructed directly from QLabs driving scenarios.
   </tr>
 </table>
 
+</div>
 ---
 
 ## 5. Training Pipeline
