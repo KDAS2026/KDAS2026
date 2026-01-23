@@ -68,18 +68,18 @@ The dataset was constructed directly from QLabs driving scenarios.
 <table>
   <tr>
     <td align="center">
-      <img src="images/4SCNN.png" width="300">
+      <img src="/images/4SCNN.png" width="300">
     </td>
     <td align="center">
-      <img src="images/1SCNN.png" width="300">
+      <img src="/images/1SCNN.png" width="300">
     </td>
   </tr>
   <tr>
     <td align="center">
-      <img src="images/2SCNN.png" width="300">
+      <img src="/images/2SCNN.png" width="300">
     </td>
     <td align="center">
-      <img src="images/3SCNN.png" width="300">
+      <img src="/images/3SCNN.png" width="300">
     </td>
   </tr>
 </table>
