@@ -248,3 +248,184 @@ Planning 및 Control 단계에서의 행동 선택에 필요한 입력으로 사
 This repository contains a fully integrated autonomous driving system  
 including perception, localization, decision making, planning, and control modules.  
 All components are designed to operate together within a ROS2-based framework.
+
+---
+
+## Virtual Stage Execution Guide (Docker + ROS2)
+
+This section describes how to run the full autonomous driving system  
+in the **Quanser Virtual QCar2 (QLabs) simulation environment** using Docker and ROS2.
+
+The procedure below reproduces the complete pipeline:  
+**Perception – Localization – Planning – Control**.
+
+---
+
+## System Overview
+
+This demo uses **two Docker containers**:
+
+- **Shell A — QLabs Simulation Container**
+  - Spawns the Virtual QCar2 vehicle, sensors, map, and scenario
+  - Must be started **before** the ROS2 containers
+
+- **Shell B–I — Development Container (ROS2)**
+  - Runs all ROS2 nodes:
+    - Perception
+    - Localization
+    - Planning
+    - Control
+
+> **Important**  
+> The QLabs container must be running first.  
+> Containers communicate using `--network host`.
+
+---
+
+## Shell A — QLabs Virtual QCar2 Simulation
+
+### 1) Run QLabs Simulation Container
+
+```bash
+cd /home/$USER/Documents/ACC_Development/docker/development_docker/quanser_dev_docker_files
+
+sudo docker run --rm -it \
+  --network host \
+  --name virtual-qcar2 \
+  quanser/virtual-qcar2 bash
+```
+
+---
+
+### 2) Initialize Scenario (Inside Container)
+
+```bash
+cd /home/qcar2_scripts/python
+python3 Base_Scenarios_Python/Setup_Real_Scenario.py
+```
+
+This script performs:
+- Virtual QCar2 vehicle spawning
+- Sensor and environment initialization
+- Driving scenario setup
+
+---
+
+## Shell B–I — Development Container (ROS2)
+
+### 1) Start Development Container
+
+Open multiple terminals (Shell B–I).  
+In **each terminal**, execute:
+
+```bash
+cd /home/$USER/Documents/ACC_Development/isaac_ros_common
+./scripts/run_dev.sh /home/$USER/Documents/ACC_Development/Development
+
+cd ros2
+```
+
+---
+
+### 2) Build (Run Once Only)
+
+In **one terminal only**:
+
+```bash
+colcon build
+```
+
+---
+
+### 3) Source Environment (Every Terminal)
+
+After the build, run in **all Shells (B–I)**:
+
+```bash
+source install/setup.bash
+```
+
+---
+
+## ROS2 Launch Sequence (Recommended Order)
+
+### Shell B — Base Virtual QCar2 Nodes
+
+```bash
+ros2 launch qcar2_nodes qcar2_virtual_launch.py
+```
+
+---
+
+### Shell C — Localization (Cartographer)
+
+```bash
+ros2 launch qcar2_nodes localization0_launch.py
+```
+
+> **Wait until Cartographer localization is stable before proceeding.**
+
+---
+
+### Shell D — Utility Nodes
+
+```bash
+ros2 launch util util_launch.py
+```
+
+---
+
+### Shell E — Path Planning
+
+```bash
+ros2 launch path_planning path_planning_launch.py
+```
+
+---
+
+### Shell F — Control (MATLAB / Simulink Interface)
+
+```bash
+ros2 launch kdas_mat kdas_mat.launch.py
+```
+
+---
+
+### Shell H — Object Detection (YOLO)
+
+```bash
+ros2 run yolo_detection yolo_node.py
+```
+
+---
+
+### Shell I — Lane Detection
+
+```bash
+ros2 launch lane_detection lane_detection_launch.py
+```
+
+---
+
+## Start Autonomous Driving (Run Last)
+
+### Shell G — Enable Autonomous Ride
+
+After **all nodes are running** and  
+**Cartographer localization is confirmed**, execute:
+
+```bash
+ros2 topic pub /ride std_msgs/msg/Char "{data: 86}"
+```
+
+This command enables autonomous driving.
+
+---
+
+## Operational Notes
+
+If the vehicle does not start moving, verify the following:
+
+- All required nodes are running (Shell B–F, H–I)
+- Cartographer localization is stable and not drifting
+- Required ROS2 topics are properly published and subscribed
