@@ -18,7 +18,7 @@
 
 
 <p align="center">
-  <img src="../../images/tf3.png" alt="Labeling examples" width="450"/>
+  <img src="../../images/tf2.png" alt="Labeling examples" width="450"/>
 </p>
 
 
@@ -28,7 +28,10 @@
 
 
 <p align="center">
-  <img src="../../images/tf6.png" alt="Labeling examples" width="450"/>
+  <img src="../../images/tf5.png" alt="Labeling examples" width="450"/>
+</p>
+<p align="center">
+  <img src="../../images/tf1.png" alt="Labeling examples" width="450"/>
 </p>
 
 
@@ -38,7 +41,7 @@
 
 
 <p align="center">
-  <img src="../../images/tf2.png" alt="Labeling examples" width="450"/>
+  <img src="../../images/tf4.png" alt="Labeling examples" width="450"/>
 </p>
 
 
@@ -59,7 +62,7 @@
 
 
 <p align="center">
-  <img src="../../images/tf2.png" alt="Labeling examples" width="450"/>
+  <img src="../../images/tf3.png" alt="Labeling examples" width="450"/>
 </p>
 
 
