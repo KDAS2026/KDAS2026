@@ -83,9 +83,7 @@
 아래는 본 자율주행 시스템을 구성하는 주요 모듈과, 각 모듈이 전체 자율주행 파이프라인 내에서 수행하는 역할을  
 구현 관점에서 정리한 내용이다.
 
-본 시스템은 ACC Self-Driving Car Student Competition에서 제시하는  
-자율주행 핵심 원칙  (Data Collection, Localization, Decision & Planning, Control)을  
-각 모듈 단위의 실제 구현으로 구성하였다.
+본 시스템은 ACC Self-Driving Car Student Competition에서 제시하는 자율주행 핵심 원칙  (Data Collection, Localization, Decision & Planning, Control)을 각 모듈 단위의 실제 구현으로 구성하였다.
 
 모듈은 실제 데이터 흐름  
 (Perception → Localization → Planning → Control)을 기준으로 정렬되어 있으며,  
