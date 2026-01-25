@@ -76,6 +76,11 @@
 
 ### [1) Localization](Localization/Cartographer/)
 
+
+<p align="center">
+  <img src="../images/localization_rviz2.png" width="450"/>
+</p
+  
 **역할**  
 Localization 모듈은 차량의 현재 위치와 자세를 추정하여,  
 자율주행 시스템 전반에서 공통으로 사용되는 **기준 좌표계 및 위치 정보**를 제공합니다.
