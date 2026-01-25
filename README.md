@@ -190,6 +190,8 @@ Localization 결과를 통해 파악된 차량 위치와
 
 ### [4) SCNN – Lane Detection](Perception/SCNN/)
 
+<img src="images/SCNN1.gif" width="800"/>
+
 **역할**  
 SCNN 모듈은 카메라 입력 영상을 기반으로 차선을 인식하고,  
 차량이 추종할 수 있는 **차선 구조 및 기준선 정보**를 생성하는 인지 모듈입니다.
