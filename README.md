@@ -34,7 +34,7 @@
 
 ---
 
-#### Key Architectural Focus (K-DAS 2026)
+### Key Architectural Focus (K-DAS 2026)
 
 - **Primary Focus**: Decision & Planning Architecture
 
