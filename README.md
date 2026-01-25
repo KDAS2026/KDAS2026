@@ -6,21 +6,14 @@
 </div>
 
 
+
 ## Introduction
 
-안녕하세요.  
-본 저장소는  **국민대학교 자율주행 팀(K-DAS)** 이 수행한  자율주행 시스템 연구 및 개발 결과를 정리한  
-메인 프로젝트 레포지토리입니다.
+본 프로젝트는 국민대학교 K-DAS팀이 **American Control Conference(ACC) Self-Driving Car Student Competition 2026** Virtual Stage 제출을 목표로 개발된 자율주행 시스템의 소스 코드를 정리한 레포지토리입니다.
 
-본 프로젝트는 **American Control Conference(ACC) Self-Driving Car Student Competition 2026**  
-Virtual Stage 제출을 목표로 수행되었으며,  
+본 저장소에는 ACC Virtual Stage 시연 영상에서 사용된 자율주행 알고리즘의 구현 코드와 함께, 각 자율주행 모듈의 설계 의도, 구현 방식,  그리고 ACC Core Principles에 기반한 시스템 구성에 대한 설명이 포함되어 있습니다.
 
-자율주행 차량의 시스템 구조를 기준으로  **인지(Perception) – 위치추정(Localization) – 판단·계획(Decision & Planning) – 제어(Control)** 단계를 분리하여 설계·구현하였습니다.
-
-각 단계는 명확한 입력과 출력을 갖도록 구성되었으며, 모듈 간 역할 분담과 데이터 흐름을 중심으로  
-전체 자율주행 시스템의 구조를 체계적으로 정리하였습니다.
-
-본 저장소에는 **ACC Virtual Stage 시연 영상에서 사용된 자율주행 알고리즘의 소스 코드**가 포함되어 있습니다.
+또한 전체 시스템의 실행 방법과 각 모듈 간 연동 구조를 확인할 수 있도록 구성되어 있습니다.
 
 
 ---
@@ -28,16 +21,15 @@ Virtual Stage 제출을 목표로 수행되었으며,
 
 ## System Evolution and Objectives
 
-본 팀은 Self-Driving Car Student Competition 2025에서 Virtual Stage 평가를 통과하여 Physical Stage에 진출한 경험이 있으며, 이를 통해 자율주행 시스템의 전반적인 완성도와 기술적 가능성을 검증할 수 있었습니다.
+본 팀은 Self-Driving Car Student Competition 2025에서 Virtual Stage 평가를 통과하여 Physical Stage에 진출한 경험이 있다.
 
-다만 실제 주행 시나리오를 기반으로 한 평가 과정에서 차량 주행의 **안정성**과 **속도 측면에서의 한계**를 명확히 인식하게 되었습니다.
+본선 주행 과정에서 **주행 안정성**과 **속도 측면에서의 한계**를 확인하였으며, 이러한 문제점을 2026 시즌 시스템 설계의 주요 개선 사항으로 설정하였다.
 
-이에 2026 시즌을 대비하여 본 시스템은  주행 안정성을 향상시키기 위한 제어 구조 개선과,  
-보다 적극적인 속도 계획이 가능하도록  의사결정 및 경로 계획 로직을 고도화하는 데 중점을 두어  
-기존의 한계를 보완·개선하였습니다.
+이에 주행 안정성을 향상시키기 위한 제어 구조 개선과, 보다 적극적인 속도 계획이 가능하도록  
+의사결정 및 경로 계획 로직을 고도화함으로써 기존 자율주행 시스템을 발전시켰다.
 
-이를 바탕으로 본 팀은  **2026 ACC Self-Driving Car Student Competition에서의 의미 있는 성과**를  
-목표로 하고 있습니다.
+이러한 개선을 통해 저희 팀은 **2026 ACC Self-Driving Car Student Competition에서의 의미 있는 성과**를  
+목표로 한다.
 
 
 ---
@@ -45,8 +37,9 @@ Virtual Stage 제출을 목표로 수행되었으며,
 
 ## Whole Project
 
-본 프로젝트에서 저희 팀은 자율주행 시스템을  
-실제 자율주행 차량의 시스템 구조에 맞추어 단계적으로 구현하였습니다.
+본 자율주행 시스템은 실제 자율주행 차량의 시스템 구조를 기준으로  
+인지(Perception), 위치추정(Localization), 판단·계획(Decision & Planning), 제어(Control)  
+단계로 구성된 계층적 구조를 따른다.
 
 - 인지 모듈은 주행 환경으로부터 필요한 정보를 추출하고  
 - 위치추정 모듈은 차량의 현재 위치와 자세를 안정적으로 추정하며  
@@ -87,15 +80,16 @@ Virtual Stage 제출을 목표로 수행되었으며,
 
 ## Project Modules Overview
 
-아래는 본 자율주행 시스템을 구성하는 주요 모듈과,
-각 모듈이 전체 파이프라인 내에서 수행하는 역할에 대한 설명입니다.
+아래는 본 자율주행 시스템을 구성하는 주요 모듈과, 각 모듈이 전체 자율주행 파이프라인 내에서 수행하는 역할을  
+구현 관점에서 정리한 내용이다.
 
-모듈 순서는 실제 데이터 흐름
-(Perception → Localization → Planning → Control)
-을 기준으로 정렬되어 있습니다.
+본 시스템은 ACC Self-Driving Car Student Competition에서 제시하는  
+자율주행 핵심 원칙  (Data Collection, Localization, Decision & Planning, Control)을  
+각 모듈 단위의 실제 구현으로 구성하였다.
 
-각 모듈의 제목을 클릭하면
-해당 모듈의 상세 문서와 구현 내용을 확인할 수 있습니다.
+모듈은 실제 데이터 흐름  
+(Perception → Localization → Planning → Control)을 기준으로 정렬되어 있으며,  
+각 항목의 제목을 통해 해당 모듈의 상세 문서와 구현 내용을 확인할 수 있다.
 
 ---
 
@@ -251,62 +245,6 @@ Planning 및 Control 단계에서의 행동 선택에 필요한 입력으로 사
 - YOLO 기반 객체 인식 모델 적용  
 - 실시간 추론 결과를 ROS2 토픽으로 송신  
 - 제어 로직과 연동 가능한 인터페이스 설계  
-
----
-
-## Core Principles of Self-Driving
-
-본 시스템에서는 자율주행 차량이 실제로 동작하기 위해 필요한  
-데이터 흐름과 의사결정 과정을 기준으로 전체 파이프라인을 구성하였습니다.
-
-아래에서는 센서 입력부터 제어 출력까지,  
-각 단계에서 데이터가 어떻게 처리되고  
-어떤 모듈을 거쳐 주행 동작으로 이어지는지를 정리합니다.
-
----
-
-### 1) Data Collection
-
-본 시스템은 주행 환경과 차량 상태를 인식하기 위해  
-카메라 및 LiDAR 센서를 기반으로 데이터를 수집합니다.
-
-- SCNN 기반 차선 인식 모듈을 통해 차선 영상 데이터를 입력으로 사용  
-- YOLO 기반 객체 인식 모듈을 통해 교통 표지판 및 신호 객체 인식 수행  
-- Cartographer SLAM을 통해 주변 환경의 거리 정보 및 지도 정보 획득  
-
-수집된 센서 데이터는 이후 단계에서  
-주행 판단과 제어에 활용될 수 있는 형태로 전달됩니다.
-
----
-
-### 2) Interpretation & Decision Making
-
-수집된 데이터는 주행 환경과 차량 상태를 해석하고,  
-차량이 어떤 행동을 수행해야 하는지를 결정하는 데 사용됩니다.
-
-- 차선 구조 및 주행 가능 영역 추론  
-- 인식된 객체의 의미 해석  
-- DQN 기반 의사결정 로직을 통한 주행 전략 선택  
-
----
-
-### 3) Localization & Path Planning
-
-차량은 지도 상에서 자신의 위치를 이해하고,  
-선택된 주행 전략에 따라 경로를 생성 및 수정합니다.
-
-- LiDAR 기반 Cartographer SLAM을 이용한 위치 추정  
-- waypoint 기반 경로 생성 및 갱신  
-
----
-
-### 4) Control Systems
-
-계획된 경로와 판단 결과를 바탕으로,  
-차량은 실제 조향 및 제동 동작을 수행합니다.
-
-- Pure Pursuit 기반 경로 추종 제어  
-- 장애물 상황에서의 회피 기동 및 차선 복귀 제어  
 
 ---
 
