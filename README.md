@@ -208,6 +208,13 @@ Planning 단계와 제어 단계의 경로 추종을 지원합니다.
 
 ### [5) YOLO – Object Detection](Perception/YOLO/)
 
+<table>
+  <tr>
+    <td align="center"><img src="../../images/yolo9.gif" alt="Sim clip #1" width="420"/><br/><b>Video (Sim) #1</b></td>
+    <td align="center"><img src="../../images/yolo10.gif" alt="Sim clip #2" width="420"/><br/><b>Video (Sim) #2</b></td>
+  </tr>
+</table>
+
 **역할**  
 YOLO 모듈은 카메라 영상을 입력으로 받아  
 교통 표지판 및 신호와 같은 객체를 실시간으로 인식하는 인지 모듈입니다.
