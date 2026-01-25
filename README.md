@@ -9,18 +9,15 @@
 ## Introduction
 
 안녕하세요.  
-본 저장소는 **국민대학교 자율주행 팀(K-DAS)**이 수행한  
-자율주행 시스템 연구 및 개발 결과를 정리한  
+본 저장소는 **국민대학교 자율주행 팀(K-DAS)**이 수행한  자율주행 시스템 연구 및 개발 결과를 정리한  
 메인 프로젝트 레포지토리입니다.
 
 본 프로젝트는 **American Control Conference(ACC) Self-Driving Car Student Competition 2026**  
 Virtual Stage 제출을 목표로 수행되었으며,  
-실제 자율주행 차량의 시스템 구조를 기준으로  
-**인지(Perception) – 위치추정(Localization) – 판단·계획(Decision & Planning) – 제어(Control)**  
-단계를 분리하여 설계·구현하였습니다.
 
-각 단계는 명확한 입력과 출력을 갖도록 구성되었으며,  
-모듈 간 역할 분담과 데이터 흐름을 중심으로  
+자율주행 차량의 시스템 구조를 기준으로  **인지(Perception) – 위치추정(Localization) – 판단·계획(Decision & Planning) – 제어(Control)** 단계를 분리하여 설계·구현하였습니다.
+
+각 단계는 명확한 입력과 출력을 갖도록 구성되었으며, 모듈 간 역할 분담과 데이터 흐름을 중심으로  
 전체 자율주행 시스템의 구조를 체계적으로 정리하였습니다.
 
 본 저장소에는 **ACC Virtual Stage 시연 영상에서 사용된 자율주행 알고리즘의 소스 코드**가 포함되어 있습니다.
