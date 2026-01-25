@@ -126,6 +126,7 @@ DQN 기반 의사결정 로직을 통해 주행 전략을 선택하며,
 
 ### [3) Control](Control/)
 
+
 **역할**  
 Control 모듈은 Planning 단계에서 생성된 주행 경로와  
 Localization을 통해 추정된 차량 상태를 입력으로 받아,  
@@ -137,6 +138,25 @@ Localization을 통해 추정된 차량 상태를 입력으로 받아,
 ---
 
 #### [3-1) Pure Pursuit Control](Control/Matlab&Simulink/Pure%20Pursuit/)
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="images/control.gif"
+           alt="Pure Pursuit Control Result"
+           width="700"/><br/>
+      <b>Pure Pursuit Steering Control Result</b>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="images/ControlMat.gif"
+           alt="Simulink Control Structure"
+           width="600"/><br/>
+      <b>Simulink-Based Steering Control Structure</b>
+    </td>
+  </tr>
+</table>
 
 **역할**  
 Pure Pursuit 모듈은 장애물이 없는 정상 주행 상황에서,  
