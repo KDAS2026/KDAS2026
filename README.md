@@ -278,11 +278,7 @@ This demo uses **two Docker containers**:
     - Localization
     - Planning
     - Control
-
-> **Important**  
-> The QLabs container must be running first.  
-> Containers communicate using `--network host`.
-
+      
 ---
 
 ## Shell A — QLabs Virtual QCar2 Simulation
