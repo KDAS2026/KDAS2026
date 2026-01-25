@@ -99,6 +99,9 @@ Planning 및 Control 모듈은 모두 Localization 결과를 기반으로 동작
 
 ### [2) Decision & Planning](Planning/)
 
+![DQN scenario 1 path](images/dqn1.png)
+![DQN scenario 1 result](images/dqn2.png)
+
 **역할**  
 Decision & Planning 모듈은 인지 및 위치추정 결과를 입력으로 받아,  
 차량이 현재 주행 상황에서 어떤 행동을 수행해야 하는지를 결정하고  
