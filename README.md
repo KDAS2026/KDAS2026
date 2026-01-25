@@ -128,7 +128,7 @@ Planning 및 Control 모듈은 모두 Localization 결과를 기반으로 동작
 
 ---
 
-### [2) Decision & Planning](Planning/)
+### [2) Decision & Planning](Decision&Planning/)
 
 <p align="center">
   <img src="images/dqn1.png" width="800"/>
