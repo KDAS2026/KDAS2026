@@ -83,11 +83,24 @@
 아래는 본 자율주행 시스템을 구성하는 주요 모듈과, 각 모듈이 전체 자율주행 파이프라인 내에서 수행하는 역할을  
 구현 관점에서 정리한 내용이다.
 
-본 시스템은 ACC Self-Driving Car Student Competition에서 제시하는 자율주행 핵심 원칙  (Data Collection, Localization, Decision & Planning, Control)을 각 모듈 단위의 실제 구현으로 구성하였다.
+본 시스템은 ACC Self-Driving Car Student Competition에서 제시하는 자율주행 핵심 원칙  
+(Data Collection, Localization, Decision & Planning, Control)을  각 모듈 단위의 실제 구현으로 구성하였다.
 
 모듈은 실제 데이터 흐름  
 (Perception → Localization → Planning → Control)을 기준으로 정렬되어 있으며,  
+
 각 항목의 제목을 통해 해당 모듈의 상세 문서와 구현 내용을 확인할 수 있다.
+
+---
+
+### Core Principles Mapping
+
+| ACC Core Principle | Implemented Modules |
+|---|---|
+| Data Collection | SCNN (Lane Detection), YOLO (Object Detection), LiDAR (Cartographer) |
+| Interpretation & Decision Making | Decision & Planning (DQN-based decision) |
+| Localization & Path Planning | Localization (Cartographer SLAM), Decision & Planning (Waypoint generation) |
+| Control Systems | Control (Pure Pursuit, Obstacle Avoidance), MATLAB/Simulink interface |
 
 ---
 
@@ -97,7 +110,9 @@
 <p align="center">
   <img src="images/localization_rviz2.png" width="800"/>
 </p
-  
+
+**Core Principle**: Localization & Path Planning  
+
 **역할**  
 Localization 모듈은 차량의 현재 위치와 자세를 추정하여,  
 자율주행 시스템 전반에서 공통으로 사용되는 **기준 좌표계 및 위치 정보**를 제공합니다.
@@ -110,7 +125,6 @@ Planning 및 Control 모듈은 모두 Localization 결과를 기반으로 동작
 - LiDAR 센서를 활용한 2D SLAM 기반 위치 추정  
 - Cartographer를 이용한 지도 생성 및 위치 추정 파이프라인 구성  
 - ROS2 TF 트리를 통한 좌표계 관리  
-- 시뮬레이션 환경에서의 위치 추정 안정성 검증  
 
 ---
 
@@ -123,6 +137,8 @@ Planning 및 Control 모듈은 모두 Localization 결과를 기반으로 동작
   <p align="center">
   <img src="images/dqn2.png" width="800"/>
 </p
+
+**Core Principle**: Interpretation & Decision Making, Localization & Path Planning  
 
 **역할**  
 Decision & Planning 모듈은 인지 및 위치추정 결과를 입력으로 받아,  
@@ -143,6 +159,7 @@ DQN 기반 의사결정 로직을 통해 주행 전략을 선택하며,
 
 ### [3) Control](Control/)
 
+**Core Principle**: Control Systems  
 
 **역할**  
 Control 모듈은 Planning 단계에서 생성된 주행 경로와  
@@ -209,6 +226,8 @@ Localization 결과를 통해 파악된 차량 위치와
 
 <img src="images/SCNN1.gif" width="800"/>
 
+**Core Principle**: Data Collection  
+
 **역할**  
 SCNN 모듈은 카메라 입력 영상을 기반으로 차선을 인식하고,  
 차량이 추종할 수 있는 **차선 구조 및 기준선 정보**를 생성하는 인지 모듈입니다.
@@ -231,6 +250,8 @@ Planning 단계와 제어 단계의 경로 추종을 지원합니다.
     <td align="center"><img src="images/yolo10.gif" alt="Sim clip #2" width="420"/><br/><b>Video (Sim) #2</b></td>
   </tr>
 </table>
+
+**Core Principle**: Data Collection  
 
 **역할**  
 YOLO 모듈은 카메라 영상을 입력으로 받아  
