@@ -138,7 +138,7 @@ Planning 및 Control 모듈은 모두 Localization 결과를 기반으로 동작
   <img src="images/dqn2.png" width="800"/>
 </p
 
-**Core Principle**: Interpretation & Decision Making, Localization & Path Planning  
+**Core Principle**: Interpretation & Decision Making, Path Planning  
 
 **역할**  
 Decision & Planning 모듈은 인지 및 위치추정 결과를 입력으로 받아,  
