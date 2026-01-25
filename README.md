@@ -34,6 +34,22 @@
 
 ---
 
+#### Key Architectural Focus (K-DAS 2026)
+
+- **Primary Focus**: Decision & Planning Architecture
+
+- **Core Improvement**:
+  - Separation of **mission-level decision making** and **path generation**
+  - Emphasis on **stable planning under dynamic driving scenarios**
+
+- **Key Techniques**:
+  - RRT-based global path planning
+  - DQN-based decision making for driving strategy selection
+
+- **Design Goal**:
+  - Improved driving stability and speed through structured decision execution
+
+---
 
 ## Whole Project
 
