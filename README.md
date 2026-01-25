@@ -9,7 +9,7 @@
 ## Introduction
 
 안녕하세요.  
-본 저장소는 **국민대학교 자율주행 팀(K-DAS)**이 수행한  자율주행 시스템 연구 및 개발 결과를 정리한  
+본 저장소는  **국민대학교 자율주행 팀(K-DAS)** 이 수행한  자율주행 시스템 연구 및 개발 결과를 정리한  
 메인 프로젝트 레포지토리입니다.
 
 본 프로젝트는 **American Control Conference(ACC) Self-Driving Car Student Competition 2026**  
