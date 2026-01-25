@@ -9,11 +9,11 @@
 
 ## Introduction
 
-본 프로젝트는 국민대학교 K-DAS팀이 **American Control Conference(ACC) Self-Driving Car Student Competition 2026** Virtual Stage 제출을 목표로 개발된 자율주행 시스템의 소스 코드를 정리한 레포지토리입니다.
+This project repository organizes the source code of an autonomous driving system developed by the Kookmin University K-DAS Team, targeting submission to the **American Control Conference (ACC) Self-Driving Car Student Competition 2026** Virtual Stage.
 
-본 저장소에는 ACC Virtual Stage 시연 영상에서 사용된 자율주행 알고리즘의 구현 코드와 함께, 각 자율주행 모듈의 설계 의도, 구현 방식,  그리고 ACC Core Principles에 기반한 시스템 구성에 대한 설명이 포함되어 있습니다.
+This repository contains the implementation code of the autonomous driving algorithms used in the ACC Virtual Stage demonstration video, along with explanations of the design intent and implementation approach of each autonomous driving module, and the overall system architecture based on the ACC Core Principles.
 
-또한 전체 시스템의 실행 방법과 각 모듈 간 연동 구조를 확인할 수 있도록 구성되어 있습니다.
+In addition, the repository is structured to allow users to verify the system execution procedure and the interconnection structure between modules.
 
 
 ---
@@ -21,15 +21,13 @@
 
 ## System Evolution and Objectives
 
-본 팀은 Self-Driving Car Student Competition 2025에서 Virtual Stage 평가를 통과하여 Physical Stage에 진출한 경험이 있다.
+The team has experience advancing to the Physical Stage by passing the Virtual Stage evaluation in the Self-Driving Car Student Competition 2025.
 
-본선 주행 과정에서 **주행 안정성**과 **속도 측면에서의 한계**를 확인하였으며, 이러한 문제점을 2026 시즌 시스템 설계의 주요 개선 사항으로 설정하였다.
+During the on-track driving phase, limitations were identified in terms of **driving stability** and **speed**, and these issues were set as the primary improvement objectives for the 2026 system design.
 
-이에 주행 안정성을 향상시키기 위한 제어 구조 개선과, 보다 적극적인 속도 계획이 가능하도록  
-의사결정 및 경로 계획 로직을 고도화함으로써 기존 자율주행 시스템을 발전시켰다.
+Accordingly, the existing autonomous driving system was advanced by improving the control architecture to enhance driving stability and by upgrading the decision-making and path planning logic to enable more aggressive speed planning.
 
-이러한 개선을 통해 저희 팀은 **2026 ACC Self-Driving Car Student Competition에서의 의미 있는 성과**를  
-목표로 한다.
+Through these improvements, the team aims to achieve **meaningful results in the 2026 ACC Self-Driving Car Student Competition**.
 
 
 ---
@@ -53,41 +51,41 @@
 
 ## Whole Project
 
-본 자율주행 시스템은 실제 자율주행 차량의 시스템 구조를 기준으로  
-인지(Perception), 위치추정(Localization), 판단·계획(Decision & Planning), 제어(Control)  
-단계로 구성된 계층적 구조를 따른다.
+This autonomous driving system follows a hierarchical structure consisting of  
+Perception, Localization, Decision & Planning, and Control stages,  
+based on the system architecture of real autonomous vehicles.
 
-- 인지 모듈은 주행 환경으로부터 필요한 정보를 추출하고  
-- 위치추정 모듈은 차량의 현재 위치와 자세를 안정적으로 추정하며  
-- 판단·계획 모듈은 해당 정보를 바탕으로 주행 전략과 경로를 결정하고  
-- 제어 모듈은 결정된 경로를 따라 차량이 실제로 주행할 수 있도록 조향·제동 명령을 생성합니다.
+- The perception modules extract necessary information from the driving environment  
+- The localization module stably estimates the vehicle’s current position and orientation  
+- The decision and planning module determines driving strategies and paths based on the extracted information  
+- The control module generates steering and braking commands to allow the vehicle to follow the selected path  
 
-아래 GIF들은 각 모듈에서 실제로 구현한 기능과 그 결과를 요약적으로 보여줍니다.  
-각 항목의 링크를 클릭하면, 해당 모듈의 상세 문서와 구현 결과를 확인할 수 있습니다.
+The GIFs below summarize the actual implemented functions and their results for each module.  
+By clicking each link, the detailed documentation and implementation results of the corresponding module can be reviewed.
 
 <table>
   <tr>
     <td align="center">
       <img src="images/YOLOReadme1.gif" width="320"><br>
-      <b>YOLO – 객체 인식 (1)</b><br>
-      <a href="Perception/YOLO/">폴더 바로가기</a>
+      <b>YOLO – Object Detection (1)</b><br>
+      <a href="Perception/YOLO/">Go to folder</a>
     </td>
     <td align="center">
       <img src="images/YOLOReadme2.gif" width="320"><br>
-      <b>YOLO – 객체 인식 (2)</b><br>
-      <a href="Perception/YOLO/">폴더 바로가기</a>
+      <b>YOLO – Object Detection (2)</b><br>
+      <a href="Perception/YOLO/">Go to folder</a>
     </td>
   </tr>
   <tr>
     <td align="center">
       <img src="images/SCNNmodel.gif" width="320"><br>
-      <b>SCNN – 차선 인식</b><br>
-      <a href="Perception/SCNN/">폴더 바로가기</a>
+      <b>SCNN – Lane Detection</b><br>
+      <a href="Perception/SCNN/">Go to folder</a>
     </td>
     <td align="center">
       <img src="images/ControlMat.gif" width="320"><br>
-      <b>Control – 조향 및 제동 제어</b><br>
-      <a href="Control/">폴더 바로가기</a>
+      <b>Control – Steering and Braking Control</b><br>
+      <a href="Control/">Go to folder</a>
     </td>
   </tr>
 </table>
@@ -96,16 +94,15 @@
 
 ## Project Modules Overview
 
-아래는 본 자율주행 시스템을 구성하는 주요 모듈과, 각 모듈이 전체 자율주행 파이프라인 내에서 수행하는 역할을  
-구현 관점에서 정리한 내용이다.
+Below is an implementation-oriented summary of the major modules composing this autonomous driving system and the roles each module performs within the overall autonomous driving pipeline.
 
-본 시스템은 ACC Self-Driving Car Student Competition에서 제시하는 자율주행 핵심 원칙  
-(Data Collection, Localization, Decision & Planning, Control)을  각 모듈 단위의 실제 구현으로 구성하였다.
+This system implements the core autonomous driving principles presented in the ACC Self-Driving Car Student Competition  
+(Data Collection, Localization, Decision & Planning, Control) as concrete module-level implementations.
 
-모듈은 실제 데이터 흐름  
-(Perception → Localization → Planning → Control)을 기준으로 정렬되어 있으며,  
+The modules are ordered according to the actual data flow  
+(Perception → Localization → Planning → Control),  
 
-각 항목의 제목을 통해 해당 모듈의 상세 문서와 구현 내용을 확인할 수 있다.
+and the detailed documentation and implementation of each module can be accessed via the title links.
 
 ---
 
@@ -129,18 +126,18 @@
 
 **Core Principle**: Localization & Path Planning  
 
-**역할**  
-Localization 모듈은 차량의 현재 위치와 자세를 추정하여,  
-자율주행 시스템 전반에서 공통으로 사용되는 **기준 좌표계 및 위치 정보**를 제공합니다.
+**Role**  
+The Localization module estimates the vehicle’s current position and orientation and provides  
+a **reference coordinate frame and pose information** commonly used throughout the autonomous driving system.
 
-Planning 및 Control 모듈은 모두 Localization 결과를 기반으로 동작하며,  
-경로 추종, 장애물 회피 등 모든 주행 제어 동작은  
-해당 위치 추정 결과를 기준으로 수행됩니다.
+Both the Planning and Control modules operate based on the Localization results, and  
+all driving control actions such as path tracking and obstacle avoidance  
+are executed with respect to the estimated pose.
 
-**구현 개요**  
-- LiDAR 센서를 활용한 2D SLAM 기반 위치 추정  
-- Cartographer를 이용한 지도 생성 및 위치 추정 파이프라인 구성  
-- ROS2 TF 트리를 통한 좌표계 관리  
+**Implementation Overview**  
+- 2D SLAM-based localization using LiDAR sensors  
+- Map generation and localization pipeline using Cartographer  
+- Coordinate frame management via ROS2 TF tree  
 
 ---
 
@@ -156,20 +153,20 @@ Planning 및 Control 모듈은 모두 Localization 결과를 기반으로 동작
 
 **Core Principle**: Interpretation & Decision Making, Path Planning  
 
-**역할**  
-Decision & Planning 모듈은 인지 및 위치추정 결과를 입력으로 받아,  
-차량이 현재 주행 상황에서 어떤 행동을 수행해야 하는지를 결정하고  
-그에 따른 주행 경로를 생성하는 역할을 담당합니다.
+**Role**  
+The Decision & Planning module receives perception and localization results as inputs,  
+determines what action the vehicle should take in the current driving situation,  
+and generates the corresponding driving path.
 
-본 시스템에서는 주행 환경 해석 결과와 차량 상태 정보를 바탕으로  
-DQN 기반 의사결정 로직을 통해 주행 전략을 선택하며,  
-선택된 전략에 따라 waypoint 기반 경로를 생성하여  
-제어 단계로 전달합니다.
+In this system, driving strategies are selected using a DQN-based decision-making logic  
+based on interpreted environmental and vehicle state information,  
+and waypoint-based paths are generated according to the selected strategy  
+and passed to the control stage.
 
-**구현 개요**
-- 차선 인식 및 객체 인식 결과를 입력으로 주행 상황 해석  
-- DQN 기반 의사결정 로직을 통한 주행 전략 선택  
-- 선택된 전략에 따른 waypoint 기반 경로 생성  
+**Implementation Overview**
+- Interpretation of driving situations using lane detection and object detection results  
+- Driving strategy selection via DQN-based decision-making logic  
+- Waypoint-based path generation according to the selected strategy  
 
 ---
 
@@ -177,13 +174,13 @@ DQN 기반 의사결정 로직을 통해 주행 전략을 선택하며,
 
 **Core Principle**: Control Systems  
 
-**역할**  
-Control 모듈은 Planning 단계에서 생성된 주행 경로와  
-Localization을 통해 추정된 차량 상태를 입력으로 받아,  
-차량이 실제로 주행할 수 있도록 **조향 및 제동 명령을 생성하는 최종 제어 단계**입니다.
+**Role**  
+The Control module receives the driving path generated by the Planning stage and  
+the vehicle state estimated through Localization,  
+and serves as the final control stage that generates **steering and braking commands** for actual vehicle driving.
 
-본 시스템의 Control 모듈은  
-정상 주행과 장애물 대응 상황을 구분하여 동작하도록 구성되어 있습니다.
+The Control module is designed to operate by distinguishing between  
+normal driving conditions and obstacle-handling situations.
 
 ---
 
@@ -208,33 +205,32 @@ Localization을 통해 추정된 차량 상태를 입력으로 받아,
   </tr>
 </table>
 
-**역할**  
-Pure Pursuit 모듈은 장애물이 없는 정상 주행 상황에서,  
-Planning 단계에서 전달된 waypoint 경로와  
-Localization 모듈로부터 전달받은 차량의 현재 위치 및 자세 정보를 기반으로  
-차량이 안정적으로 주행하도록 조향각을 계산하는 경로 추종 제어 모듈입니다.
+**Role**  
+The Pure Pursuit module computes steering angles for stable vehicle driving under normal conditions without obstacles,  
+based on waypoint paths provided by the Planning stage and  
+the vehicle’s current position and orientation received from the Localization module.
 
-**구현 개요**  
-- Look-Ahead Distance 기반 목표점 추종 방식 적용  
-- 차량의 현재 위치와 목표점 간의 기하학적 관계를 이용한 조향각 계산  
-- Simulink 기반 제어기 설계 및 ROS2 노드 형태로 연동  
+**Implementation Overview**  
+- Target point tracking based on Look-Ahead Distance  
+- Steering angle computation using the geometric relationship between the vehicle pose and the target point  
+- Controller design in Simulink and integration as a ROS2 node  
 
 ---
 
 #### [3-2) Obstacle Avoidance Control](Control/Obstacle%20Avoidance/)
 
-**역할**  
-Obstacle Avoidance 모듈은 주행 경로 상에 장애물이 존재하는 경우,  
-Localization 결과를 통해 파악된 차량 위치와  
-센서를 통해 인식된 장애물의 위치, 크기, 그리고 차량과 장애물 간의 상대 거리를 고려하여  
-충돌을 방지하기 위한 횡방향 회피 기동과 차선 복귀 동작을 수행하는 제어 모듈입니다.
+**Role**  
+The Obstacle Avoidance module performs lateral avoidance maneuvers and lane recovery actions to prevent collisions  
+by considering the vehicle position obtained from Localization,  
+the detected obstacle’s position and size from sensors,  
+and the relative distance between the vehicle and the obstacle.
 
-**구현 개요**  
-- 전방 장애물과의 거리 조건을 기반으로 회피 기동 필요 여부 판단  
-- LiDAR 또는 Depth Camera를 이용한 장애물 위치 및 크기 추정  
-- 차량 폭과 안전 여유 거리를 고려한 최소 횡방향 회피 거리 계산  
-- 기존 waypoint를 기반으로 한 국소적 경로 수정 방식 적용  
-- 일정 곡률을 이용한 회피 기동 수행 및 동일 곡률 기반 차선 복귀  
+**Implementation Overview**  
+- Avoidance triggering based on distance conditions to front obstacles  
+- Estimation of obstacle position and size using LiDAR or Depth Camera  
+- Minimum lateral offset calculation considering vehicle width and safety margin  
+- Local path modification based on existing waypoints  
+- Constant-curvature avoidance maneuver and symmetric lane recovery  
 
 ---
 
@@ -244,17 +240,17 @@ Localization 결과를 통해 파악된 차량 위치와
 
 **Core Principle**: Data Collection  
 
-**역할**  
-SCNN 모듈은 카메라 입력 영상을 기반으로 차선을 인식하고,  
-차량이 추종할 수 있는 **차선 구조 및 기준선 정보**를 생성하는 인지 모듈입니다.
+**Role**  
+The SCNN module detects lane markings from camera input images and  
+generates **lane structure and reference line information** that the vehicle can follow.
 
-차선 인식 결과는 주행 가능 영역 추론 및 경로 생성에 활용되며,  
-Planning 단계와 제어 단계의 경로 추종을 지원합니다.
+The lane detection results are used for drivable area inference and path generation,  
+supporting path tracking in both the Planning and Control stages.
 
-**구현 개요**  
-- SCNN 모델 기반 차선 인식 파이프라인 구성  
-- 입력 영상 전처리 및 출력 후처리 설계  
-- ROS2 메시지 형태로 차선 정보 전달  
+**Implementation Overview**  
+- Lane detection pipeline based on the SCNN model  
+- Input image preprocessing and output postprocessing  
+- Lane information transmission via ROS2 messages  
 
 ---
 
@@ -269,17 +265,16 @@ Planning 단계와 제어 단계의 경로 추종을 지원합니다.
 
 **Core Principle**: Data Collection  
 
-**역할**  
-YOLO 모듈은 카메라 영상을 입력으로 받아  
-교통 표지판 및 신호와 같은 객체를 실시간으로 인식하는 인지 모듈입니다.
+**Role**  
+The YOLO module receives camera images as input and performs real-time detection of objects such as traffic signs and signals.
 
-인식된 객체 정보는 주행 상황 해석 및 의사결정에 활용되며,  
-Planning 및 Control 단계에서의 행동 선택에 필요한 입력으로 사용됩니다.
+The detected object information is used for driving situation interpretation and decision-making,  
+and serves as an input for behavior selection in the Planning and Control stages.
 
-**구현 개요**  
-- YOLO 기반 객체 인식 모델 적용  
-- 실시간 추론 결과를 ROS2 토픽으로 송신  
-- 제어 로직과 연동 가능한 인터페이스 설계  
+**Implementation Overview**  
+- Application of YOLO-based object detection models  
+- Transmission of real-time inference results via ROS2 topics  
+- Interface design for integration with control logic  
 
 ---
 
