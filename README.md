@@ -99,7 +99,7 @@
 |---|---|
 | Data Collection | SCNN (Lane Detection), YOLO (Object Detection), LiDAR (Cartographer) |
 | Interpretation & Decision Making | Decision & Planning (DQN-based decision) |
-| Localization & Path Planning | Localization (Cartographer SLAM), Decision & Planning (Waypoint generation) |
+| Localization & Path Planning | Localization (Cartographer SLAM), Decision & Planning (Path generation) |
 | Control Systems | Control (Pure Pursuit, Obstacle Avoidance), MATLAB/Simulink interface |
 
 ---
