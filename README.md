@@ -78,7 +78,7 @@
 
 
 <p align="center">
-  <img src="../images/localization_rviz2.png" width="450"/>
+  <img src="images/localization_rviz2.png" width="450"/>
 </p
   
 **역할**  
