@@ -210,8 +210,8 @@ Planning 단계와 제어 단계의 경로 추종을 지원합니다.
 
 <table>
   <tr>
-    <td align="center"><img src="../../images/yolo9.gif" alt="Sim clip #1" width="420"/><br/><b>Video (Sim) #1</b></td>
-    <td align="center"><img src="../../images/yolo10.gif" alt="Sim clip #2" width="420"/><br/><b>Video (Sim) #2</b></td>
+    <td align="center"><img src="images/yolo9.gif" alt="Sim clip #1" width="420"/><br/><b>Video (Sim) #1</b></td>
+    <td align="center"><img src="images/yolo10.gif" alt="Sim clip #2" width="420"/><br/><b>Video (Sim) #2</b></td>
   </tr>
 </table>
 
