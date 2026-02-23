@@ -171,7 +171,7 @@ relationship between the vehicle and the reference path.
   </tr>
   <tr>
     <td align="center">
-      <img src="../../../images/ControlMat.gif"
+      <img src="../../../images/ControlMat1.gif"
            alt="Simulink Control Structure"
            width="600"/><br/>
       <b>Simulink-Based Steering Control Structure</b>
