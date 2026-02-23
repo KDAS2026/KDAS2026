@@ -296,6 +296,19 @@ The procedure below reproduces the complete pipeline:
 
 ---
 
+### Step 0 — Prepare Workspace
+
+Clone this repository and copy the ROS2 workspace located at:
+
+code/ros2/src
+
+into:
+
+ACC_Development/Development/ros2/src
+
+
+---
+
 ## System Overview
 
 This demo uses **two Docker containers**:
