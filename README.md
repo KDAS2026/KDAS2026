@@ -433,7 +433,7 @@ ros2 run yolo_detection yolo_node.py
 
 ## Start Autonomous Driving (Run Last)
 
-### Shell G — Enable Autonomous Ride
+### Shell I — Enable Autonomous Ride
 
 After **all nodes are running** and  
 **Cartographer localization is confirmed**, execute:
