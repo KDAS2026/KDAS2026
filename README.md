@@ -430,13 +430,6 @@ ros2 run yolo_detection yolo_node.py
 
 ---
 
-### Shell I — Lane Detection
-
-```bash
-ros2 launch lane_detection lane_detection_launch.py
-```
-
----
 
 ## Start Autonomous Driving (Run Last)
 
