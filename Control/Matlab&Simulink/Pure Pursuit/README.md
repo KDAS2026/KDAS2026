@@ -95,6 +95,12 @@ based on the target point and Look-Ahead Distance provided by the Helper node.
 
 ## 3. ROS2–Simulink Integration via Code Generation
 
+<table>
+  <tr>
+      <img src="../../../images/ControlMat3.png" alt="Pure Pursuit Algorithm" width="600"/><br/>
+      <b>Pure Pursuit Algorithm</b>
+    </td>
+
 Instead of limiting the controller to MATLAB-only simulation,  
 **Simulink Code Generation** was used to compile the Pure Pursuit controller into a ROS2 node.
 
@@ -111,6 +117,14 @@ The Simulink model uses ROS2 Subscriber and Publisher blocks to directly interfa
 ## 4. Data Flow Between Helper and Simulink
 
 The table below summarizes the **actual data interface** used between the Helper node and the Simulink-based controller during the qualification stage.
+
+
+<table>
+  <tr>
+      <img src="../../../images/ControlMat2.png" alt="Pure Pursuit Algorithm" width="600"/><br/>
+      <b>Pure Pursuit Algorithm</b>
+    </td>
+
 
 | Category | Sender | ROS2 Topic / Data | Description | Processing in Simulink |
 |---|---|---|---|---|
