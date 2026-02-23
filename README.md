@@ -417,7 +417,7 @@ ros2 launch path_planning path_planning_launch.py
 ### Shell F — Control (MATLAB / Simulink Interface)
 
 ```bash
-ros2 launch kdas_mat kdas_mat.launch.py
+ros2 launch kdas_mat_pp_waypoints kdas_mat.launch.py
 ```
 
 ---
