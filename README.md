@@ -83,7 +83,7 @@ By clicking each link, the detailed documentation and implementation results of 
       <a href="Perception/SCNN/">Go to folder</a>
     </td>
     <td align="center">
-      <img src="images/ControlMat.gif" width="320"><br>
+      <img src="images/ControlMat1.gif" width="320"><br>
       <b>Control – Steering and Braking Control</b><br>
       <a href="Control/">Go to folder</a>
     </td>
