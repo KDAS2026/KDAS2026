@@ -425,7 +425,7 @@ ros2 launch kdas_mat kdas_mat.launch.py
 ### Shell H — Object Detection (YOLO)
 
 ```bash
-ros2 run yolo_detection yolo_node.py
+ros2 launch yolo_detection yolo_node.py
 ```
 
 ---
