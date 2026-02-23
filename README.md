@@ -304,7 +304,7 @@ This demo uses **two Docker containers**:
   - Spawns the Virtual QCar2 vehicle, sensors, map, and scenario
   - Must be started **before** the ROS2 containers
 
-- **Shell B–I — Development Container (ROS2)**
+- **Shell B — Development Container (ROS2)**
   - Runs all ROS2 nodes:
     - Perception
     - Localization
