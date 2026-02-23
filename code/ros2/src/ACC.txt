@@ -1,0 +1,96 @@
+
+
+########################################
+###### DOUBLE CHECK FOR ISSAC ENV ######
+########################################
+
+
+ssh nvidia@192.168.2.11
+ssh nvidia@192.168.3.11
+
+nmcli device wifi connect Quanser_Practice_Field password UVS_wifi
+nmcli device wifi connect Quanser_UVS-5G password UVS_wifi
+
+# jetson to laptop
+rsync -avz nvidia@192.168.2.11:/home/nvidia/Documents/ACC_Development/dev/src ~/ACC2025_ws
+rsync -avz nvidia@192.168.3.11:/home/nvidia/Documents/ACC_Development/dev/src ~/ACC2025_ws
+
+# laptop to jetson
+
+rsync -avz ~/ACC2025_ws/src nvidia@192.168.3.11:/home/nvidia/Documents/ACC_Development/dev/
+rsync -avz ~/ACC2025_ws/src nvidia@192.168.2.11:/home/nvidia/Documents/ACC_Development/dev/
+
+rsync -avz nvidia@192.168.3.11:/home/nvidia/Documents/ACC_Development/dev/save ~/ACC2025_ws/	
+
+rsync -avz nvidia@192.168.2.11:/home/nvidia/Documents/ACC_Development/dev/save/location_data.csv ~/ACC2025_ws/save
+
+--- QCar2 Node ---
+source /opt/ros/humble/setup.bash
+cd /home/$USER/ros2
+source install/setup.bash
+ros2 launch qcar2_nodes qcar2_launch.py
+
+
+
+--- Start Issac-ROS ---
+
+cd /home/$USER/Documents/ACC_Development/isaac_ros_common
+./scripts/run_local_dev.sh  /home/$USER/Documents/ACC_Development/dev
+
+
+
+source install/setup.bash
+ros2 launch qcar2_nodes localization0_launch.py
+
+source install/setup.bash
+ros2 launch util util_launch.py
+
+source install/setup.bash
+ros2 run kdas_mat KDAS_mat
+
+source install/setup.bash
+ros2 run qcar2_nodes keyboardCommand
+ros2 launch qcar2_nodes keyboardCommand
+
+source install/setup.bash
+ros2 launch path_planning path_planning_launch.py
+
+# A
+ros2 topic pub /ride std_msgs/msg/Char "{data: 65}"
+
+# B
+ros2 topic pub /ride std_msgs/msg/Char "{data: 66}"
+
+# C
+ros2 topic pub /ride std_msgs/msg/Char "{data: 67}"
+
+#D
+ros2 topic pub /ride std_msgs/msg/Char "{data: 68}"
+
+# M
+ros2 topic pub /ride std_msgs/msg/Char "{data: 77}"
+
+
+
+
+
+
+
+source install/setup.bash
+ros2 launch qcar2_nodes mapping_launch.py
+
+source install/setup.bash
+ros2 launch util util_launch.py
+
+source install/setup.bash
+ros2 run util waypointSaver.py
+ros2 launch util waypoint_saver.launch.py
+
+source install/setup.bash
+ros2 run util savevideo.py
+
+
+ros2 service call /write_state cartographer_ros_msgs/srv/WriteState "{filename: 'ACC2.pbstream', include_unfinished_submaps: true}"
+
+
+

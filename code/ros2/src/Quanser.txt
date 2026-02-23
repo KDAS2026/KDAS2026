@@ -1,0 +1,133 @@
+/usr/local/MATLAB/R2024b/bin/matlab
+
+# Open QLabs first
+
+# Open Docker environment
+cd /home/$USER/Documents/ACC_Development/docker/virtual_qcar2
+sudo docker run --rm -it --network host --name virtual-qcar2 quanser/acc2025-virtual-qcar2 bash
+
+
+[Docker]
+1.
+cd /home/qcar2_scripts/python
+python3 Base_Scenarios_Python/Setup_Real_Scenario.py
+
+python3 /home/qcar2_scripts/python/Base_Scenarios_Python/test_
+
+
+python3 Base_Scenarios_Python/Setup_Competition_Map.py
+python3 Base_Scenarios_Python/depthCameraCalibration_Scenario.py
+python3 /home/qcar2_scripts/python/Base_Scenarios_Python/Setup_Real_Scenario.py
+python3 /home/qcar2_scripts/python/Base_Scenarios_Python/waypoint_circle1.py
+python3 /home/qcar2_scripts/python/Base_Scenarios_Python/waypoint_corner1a.py
+python3 /home/qcar2_scripts/python/Base_Scenarios_Python/waypoint_four.py
+python3 /home/qcar2_scripts/python/Base_Scenarios_Python/waypoint_righttop.py
+python3 /home/qcar2_scripts/python/Base_Scenarios_Python/waypoint_leftbot.py
+python3 /home/qcar2_scripts/python/Base_Scenarios_Python/waypoint_three.py
+python3 /home/qcar2_scripts/python/Base_Scenarios_Python/test_b.py
+
+python3 /home/qcar2_scripts/python/Base_Scenarios_Python/waypoint_corner1b2.py
+
+python3 /home/qcar2_scripts/python/Base_Scenarios_Python/waypoint_circle2.py
+
+# docker image update
+
+sudo docker build --build-arg BASE_IMAGE=quanser/acc2025-virtual-qcar2 -t quanser/acc2025-virtual-qcar2 .
+
+
+
+python3 /home/qcar2_scripts/python/Base_Scenarios_Python/wallmap.py
+python3 /home/qcar2_scripts/python/Base_Scenarios_Python/mapping.py
+python3 /home/qcar2_scripts/python/Base_Scenarios_Python/depth_test.py
+
+
+# Open Isaac Container
+cd /home/$USER/Documents/ACC_Development/isaac_ros_common/
+./scripts/run_dev.sh  /home/$USER/Documents/ACC_Development/Development
+
+
+[Isaac]
+. install/setup.bash
+
+ros2 launch qcar2_nodes Cartographer_localization.py
+
+ros2 run path_planning stopper
+
+ros2 launch util util_launch.py
+
+ros2 run yolo_detection yolo_node.py
+
+ros2 launch lane_detection lane_detection_launch.py
+
+
+
+ros2 run qcar2_nodes keyboardCommand
+
+ros2 run path_planning path_sender.py
+
+ros2 run util waypointSaver.py
+
+
+
+
+
+[Isaac]
+ros2 pkg executables <package_name>
+
+ros2 launch qcar2_nodes qcar2_virtual_launch.py
+
+ros2 launch qcar2_nodes qcar2_cartographer_launch.py
+ros2 launch qcar2_nodes qcar2_cartographer_virtual_launch.py
+
+ros2 service call /write_state cartographer_ros_msgs/srv/WriteState "{filename: 'physical_map.pbstream', include_unfinished_submaps: true}"
+ros2 run tf2_ros tf2_echo map base_scan
+
+ros2 run util savevideo.py
+ros2 run util save_res_video.py
+ros2 run util depth_csv.py
+ros2 run util image_save.py
+ros2 run util get_pixel_depth.py
+ros2 run util depthCSVExport.py
+
+ros2 run util saveframe.py
+ros2 launch util test.py
+
+
+ros2 launch qcar2_nodes myLaunch.py
+
+ros2 topic pub <topic_name> <msg_type> "msg"
+
+===============================================================================
+보형
+quanser가상환경 도커 컨테이너
+
+cd /home/$USER/Documents/ACC_Development/docker/development_docker/quanser_dev_docker_files
+sudo docker run --rm -it --network host --name virtual-qcar2 quanser/virtual-qcar2 bash
+
+
+docker exec -it virtual-qcar2 bash
+
+
+
+개발환경 도커 컨테이너
+cd /home/$USER/Documents/ACC_Development/isaac_ros_common
+./scripts/run_dev.sh /home/$USER/Documents/ACC_Development/Development
+
+
+
+ROS2 Humble 노드 실행 방법
+1.우분투 환경에서 QLabs 앱을 열고 SDCS -> Open Plane으로 이동합니다.
+2.Quanser 가상 환경 Docker 컨테이너 내부에서 다음 경로로 이동합니다.
+cd /home/qcar2_scripts/python
+
+3.맵을 생성하기 위해 스크립트를 실행합니다.
+python3 Base_Scenarios_Python/Setup_Competition_Map.py
+
+4.이제 개발용 Docker(Isaac-ROS) 컨테이너 터미널을 열고 다음 명령어를 순서대로 실행합니다.
+# 빌드
+colcon build
+# 환경 변수 설정
+. install/setup.bash
+# 가상 QCar2 런치 파일 실행
+ros2 launch qcar2_nodes qcar2_virtual_launch.py
+sudo pip3 install pandas

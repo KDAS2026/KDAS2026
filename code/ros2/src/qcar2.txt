@@ -1,0 +1,75 @@
+sudo systemctl stop NetworkManager
+~/start_dhcp-ap.sh
+
+pw: AccessPoint
+
+
+# checks for DHCP request
+cat /var/lib/misc/dnsmasq.leases
+
+# ping scan every IP on subnet
+nmap -sn 192.168.4.0/24
+
+--- SSH ---
+ssh nvidia@[ip_address]
+
+scp username@remote_ip:/path/to/remote/file ~/path/to/local/destination
+scp file1 file2 file3 username@remote_ip:/remote/destination/
+rsync -avz /path/to/local/file_or_folder username@server_ip:/path/to/remote/destination/
+
+
+
+
+########################################
+###### DOUBLE CHECK FOR ISSAC ENV ######
+########################################
+
+
+ssh nvidia@192.168.2.66
+
+
+# jetson to laptop
+rsync -avz nvidia@192.168.2.66:/home/nvidia/Documents/ACC_Development/dev/src ~/ACC2025_ws
+
+# laptop to jetson
+rsync -avz ~/ACC2025_ws/src nvidia@192.168.2.66:/home/nvidia/Documents/ACC_Development/dev/
+
+
+
+--- QCar2 Node ---
+source /opt/ros/humble/setup.bash
+cd /home/$USER/ros2
+source install/setup.bash
+ros2 launch qcar2_nodes qcar2_launch.py
+
+
+
+--- Start Issac-ROS ---
+cd /home/$USER/Documents/ACC_Development/isaac_ros_common
+./scripts/run_dev.sh  /home/$USER/Documents/ACC_Development/dev
+
+
+
+cd /home/$USER/Documents/ACC_Development/isaac_ros_common
+./scripts/run_local_dev.sh  /home/$USER/Documents/ACC_Development/dev
+
+
+--- Issac-ROS container ---
+source install/setup.bash
+
+ros2 launch qcar2_nodes localization_launch.py
+
+ros2 launch util util_launch.py
+
+ros2 run kdas_mat KDAS_mat
+
+
+
+ros2 run qcar2_nodes keyboardCommand
+
+ros2 run util waypointSaver.py
+
+ros2 run util savevideo.py
+
+ros2 launch qcar2_nodes mapping_launch.py
+
