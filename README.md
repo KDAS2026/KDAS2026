@@ -342,7 +342,7 @@ This script performs:
 
 ---
 
-## Shell B–I — Development Container (ROS2)
+## Shell B – Development Container (ROS2)
 
 ### 1) Start Development Container
 
