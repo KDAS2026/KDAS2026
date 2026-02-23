@@ -197,7 +197,7 @@ normal driving conditions and obstacle-handling situations.
   </tr>
   <tr>
     <td align="center">
-      <img src="images/ControlMat.gif"
+      <img src="images/ControlMat1.gif"
            alt="Simulink Control Structure"
            width="600"/><br/>
       <b>Simulink-Based Steering Control Structure</b>
